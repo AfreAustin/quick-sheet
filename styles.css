@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+header {
+    border: 1px solid;
+}
+
+nav {
+    border: 1px solid;
+}
+
+main {
+    border: 1px solid;
+}
+
+aside {
+    border: 1px solid;
+}
+
+footer {
+    border: 1px solid;
+}
