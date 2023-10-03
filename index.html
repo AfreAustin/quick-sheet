@@ -1,66 +1,99 @@
 <!DOCTYPE html>
-<html xmlns=http://www.w3.org/1999/xhtml>
+<html xmlns=http://www.w3.org/1999/xhtml lang="en">
 <head>
-    <title>Quick Sheet</title>
-    <link rel="stylesheet" href="styles.css" />
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Sheet</title>
+  <!-- <base href="https://www.quicksheet.com/" target="_blank"/> -->
+<!--  <link media="screen and (max-width: 600px)" href="styles/x-small.css" type="text/css" rel="stylesheet" />
+  <link media="screen and (min-width: 600px)" href="styles/small.css" type="text/css" rel="stylesheet" />
+  <link media="screen and (min-width: 768px)" href="styles/medium.css" type="text/css" rel="stylesheet" /> -->
+  <link media="screen and (min-width: 992px)" href="styles/large.css" type="text/css" rel="stylesheet" /> <!-- laptops/desktops -->
+<!--  <link media="screen and (min-width: 1200px)" href="styles/x-large.css" type="text/css" rel="stylesheet" /> -->
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-    <header>
-        <a>
-            <img src="logo.png" alt="Quick Sheets Logo" title="Quick Sheets Home"/>
-            Quick Sheets
-        </a>
-    </header>
+  <nav class="site-nav">
+    <a class="site-link"> <img src="logo.png" alt="Quick Sheets Logo" title="Quick Sheets Home"/> </a>
+    <a class="site-link" href="#" title="Web Development">Web Development</a> 
+    <a class="site-link" href="#" title="Data Analysis">Data Analysis</a>
+    <a class="site-link" href="#" title="Machine Language">Machine Language</a> 
+    <a class="site-link" href="#" title="FPGA Programming">Embedded Systems</a> 
+  </nav>
+  <br /><hr />
+  <header>
+    <menu class="ref-nav">
+      <li>HTML</li>       <!-- XHTML XML --> 
+      <li>CSS</li>        <!-- SASS SCSS Bootstrap -->
+      <li>JavaScript</li> <!-- TypeScript -->
+      <li>PHP</li>
+      <li>SQL</li>        <!-- MySQL MongoDB-->
+    </menu>
+    <h1>Web Development: HTML Reference</h1>
+  </header>
+  <main class="reference">
+    <dl class="directory">
+      <search class="ref-search"> 
+        <input id="dir-search" type="search" placeholder="Q Search..."  oninput="filterDirectory()" />
+      </search>
 
-    <nav>
-        <menu>
-            NAV
-            NAV
-        </menu>
-    </nav>
-    <hr />
+      <section class="category">
+        <h2>Category</h2>
 
-    <main>
-        <h1>HTML</h1>
-        <table>
-            <caption>HTML Tags</caption>
-            <colgroup>
-                <col span="3" />
-            </colgroup>
-            <thead>
-                <tr>
-                    <th>Tag</th>
-                    <th>Attributes</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>HTML-Tag</td>
-                    <td>Tag-Attributes</td>
-                    <td>Tag-Description</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">
-                        <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </main>
-
-    <aside>
-        <h2>TAG ASIDE</h2>
-    </aside>
-    <hr />
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+    </dl>
     
-    <footer>
-        <address>created by AfreAustin</address>
-    </footer>
+    <dialog id="details">
+      <article class="term-details">
+        <h2>Tag</h2>
+        <p>Definition</p>
+        
+        <cite><a href="#">Reference</a></cite>
+      </article>
+    </dialog>
+  </main>
+  <hr />
+  <footer>
+    <span><a class="standard" href="https://html.spec.whatwg.org/multipage/">HTML Standard</a></span>
+    <address class="creator">Quick Sheets created by AfreAustin</address>
+  </footer>
+
+  <script>
+
+  </script>
+  <noscript>JavaScript not supported :/</noscript>
 </body>
 </html>
+
+<!--
+      <table>
+        <caption>HTML Tags</caption>
+        <colgroup>
+          <col span="2" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HTML-Tag</td>
+            <td>Tag-Description</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">
+              <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+-->

@@ -1,0 +1,131 @@
+/* https://www.canva.com/colors/color-palettes/october-skies/ 
+#9271C2
+#2D1674
+#FFF2FF
+#703ACF
+*/
+
+* {
+    box-sizing: border-box;
+    color: #2D1674;
+}
+
+body {
+    overflow: hidden;
+    margin: 8px 0;
+    background-color: #FFF2FF;    
+    height: 100vh;
+}
+
+.site-nav {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    overflow-x: scroll;
+    background-color: #9271C2;
+    padding: 8px;
+    width: 100%;
+    height: 35px;
+}
+.site-link {
+    padding: 0 10px;
+    color: #FFF2FF;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    font-weight: bolder;
+}
+.site-link:hover {
+    opacity: 75%;
+    border: 5px double white;
+    background-color: #703ACF;
+    color: white;
+}
+
+
+.ref-nav {
+    display: flex;
+    width: 100%;
+    list-style-type: none; 
+    gap: 1em;
+}
+
+.reference {
+    height: 70%;
+}
+
+.directory {
+    overflow: scroll;
+    height: 100%;
+    counter-reset: category-count;
+}
+
+.ref-search {
+    margin: 10px;
+    text-align: center;
+}
+#dir-search {
+    border: double;
+    width: 50%;
+    font-size: larger;
+}
+
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.category h2 {
+    width: 100%;
+    text-align: center;
+}
+.category h2::before {
+    counter-increment: category-count;
+    content: counter(category-count) ". ";
+}
+.category .term {
+    flex-basis: 30%;
+    border: 1px solid gray;
+    overflow-wrap: break-word;
+    text-align: center;
+    cursor:zoom-in;
+}
+.category .term:hover {
+    opacity: 75%;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.category .cmd {
+    font-weight: bold;
+}
+.category .def {
+    margin-left: 0px;
+}
+
+#details {
+    position: absolute;
+    top: 10%;
+    height: 80%;
+    width: 80%;
+}
+article {
+    overflow: scroll;
+    text-align: center;
+}
+
+.standard {
+    color: #FFF2FF;
+}
+
+.creator {
+    float: right;
+    color: #FFF2FF;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: #9271C2;
+    height: 5%;
+}
