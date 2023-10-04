@@ -9,27 +9,76 @@
   <link media="screen and (min-width: 992px)" href="styles/large.css" type="text/css" rel="stylesheet" /> <!-- laptops/desktops -->
 <!--  <link media="screen and (min-width: 1200px)" href="styles/x-large.css" type="text/css" rel="stylesheet" /> -->
   
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="Keywords" content="Reference">
+  <meta name="Description" content="Reference for various computer languages and concepts" />
 </head>
 <body>
-  <nav class="site-nav">
-    <a class="site-link" href="#" title="Web Development">Web Development</a> 
-    <a class="site-link" href="#" title="Data Analysis">Data Analysis</a>
-    <a class="site-link" href="#" title="Assembly Language">Assembly Language</a> 
-    <a class="site-link" href="#" title="Embedded Systems">Embedded Systems</a>
-  </nav>
-  <header>
-    <menu class="ref-nav">
-      <li>HTML</li>       <!-- XHTML XML --> 
-      <li>CSS</li>        <!-- SASS SCSS Bootstrap -->
-      <li>JavaScript</li> <!-- TypeScript -->
-      <li>PHP</li>
-      <li>SQL</li>        <!-- MySQL MongoDB-->
+  <nav class="side-nav">
+    <menu class="nav-ctrl">
+      <li id="nav-toggle" onclick="toggleNav()">&#x25C4;</li>
+      <li>QUICK SHEETS</li>
     </menu>
-    <h1 class="ref-title">Web Development: HTML Reference</h1>
-  </header>
+    <hr />
+    <details class="nav-item">
+      <summary>Web Development</summary>
+      <ul class="nav-list">
+        <li>HTML</li>
+        <li>&nbsp; XML</li>
+        <li>&nbsp; XHTML</li>
+        <li>CSS</li>
+        <li>&nbsp; SASS</li>
+        <li>&nbsp; SCSS</li>
+        <li>&nbsp; BootStrap</li>
+        <li>JavaScript</li>
+        <li>&nbsp; TypeScript</li>
+        <li>PHP</li>
+        <li>SQL</li>
+        <li>&nbsp; MySQL</li>
+        <li>&nbsp; MongoDB</li>
+      </ul>
+    </details>
+    <details class="nav-item">
+      <summary>Data Analysis</summary>
+      <ul class="nav-list">
+        <li>Python</li>
+        <li>MATLAB</li>
+        <li>&nbsp; Simulink</li>
+        <li>Mathematica</li>
+      </ul>
+    </details>
+    <details class="nav-item">
+      <summary>Assembly Language</summary>
+      <ul class="nav-list">
+        <li>Assembly</li>
+        <li>PIC32</li>
+        <li>Verilog</li>
+        <li>MIPS</li>
+      </ul>
+    </details>
+    <details class="nav-item">
+      <summary>Embedded System</summary>
+      <ul class="nav-list">
+        <li>Altera Quartus</li>
+        <li>MPLAB</li>
+        <li>Xilinx Vivado</li>
+        <li>Renesas e2 Studio</li>
+      </ul>
+    </details>
+    <hr />
+    <footer>
+      <a class="standard" href="https://html.spec.whatwg.org/multipage/">
+        HTML Standard
+      </a>
+      <address class="creator">created by AfreAustin</address>
+    </footer>
+  </nav>
   <main class="reference">
+    <header>
+      <h1 class="ref-title">Web Development: HTML Reference</h1>
+    </header>
+  
     <dl class="directory">
       <search class="ref-search"> 
         <input id="dir-search" type="search" placeholder="Q Search..."  oninput="filterDirectory()" />
@@ -67,10 +116,6 @@
       </article>
     </dialog>
   </main>
-  <footer>
-    <span><a class="standard" href="https://html.spec.whatwg.org/multipage/">HTML Standard</a></span>
-    <address class="creator">Quick Sheet created by AfreAustin</address>
-  </footer>
 
   <script>
 

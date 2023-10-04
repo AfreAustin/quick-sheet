@@ -7,54 +7,84 @@
 
 * {
     box-sizing: border-box;
-    color: #2D1674;
 }
 
 body {
-    margin: 0;
     background-color: #FFF2FF;    
+    margin: 0;
+    padding: 5px 20px;
     height: 100%;
 }
 
-.site-nav {
-    display: inline-block;
-    background-color: #703ACF;
-    margin: 0;
-    padding: 8px;
-    width: 100%;
-    height: 36px;
-}
-.site-link {
-    margin: 0;
-    border: 5px solid #703ACF;
-    padding: 0 5px;
-    color: #FFF2FF;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bolder;
-} .site-link:hover { border: 5px double #FFF2FF; }
-
-.ref-nav {
-    display: flex;
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: #2D1674;
     margin: 0;
-    padding: 5px;
+    border: 5px inset #703ACF;
+    padding: 8px;
+    width: 200px;
+    height: 100%;
+    color: #FFF2FF;
+    overflow: scroll;
+    overscroll-behavior: contain;
+    z-index: 1;
+}
+.nav-ctrl {
+    margin: 15px 0;
+    padding: 0;
     width: 100%;
-    height: 30px;
-    list-style-type: none; 
+    list-style-type: none;
     gap: 1em;
-} .ref-nav li { color: #FFF2FF; } 
-.ref-title {
-    margin: 0;
-    padding: 0 20px;
-    height: 34px;
+}
+#nav-toggle {
+    float: right;
+}
+.nav-item {
+    background-color: #703ACF;
+    margin: 15px 0;
+    border: 1px outset;
+    user-select: none; 
+    cursor: pointer;
+}
+.nav-list {
+    background-color: #FFF2FF;
+    margin: 5px;
+    padding: 5px;
+    max-height: 10rem;
+    overflow: scroll;
+    list-style-type: none;
+    gap: 1em;
+    overscroll-behavior: contain;
+}
+.nav-list li { 
+    margin: 2px;
+    padding-left: 2px;
+    color: #2D1674 ;
+}
+.nav-list li:hover {  
+    background-color: #2D1674;
+    color: #FFF2FF;
+}
+footer {
+    background-color: #2D1674;
+    height: 25px;
+    color: #FFF2FF;
+    text-align: center;
+}
+.standard {
+    color: #FFF2FF;
+    text-align: center;
+}
+.creator {
+    margin-top: 15px;
+    float: right;
 }
 
 .reference {
-    border: solid 1px yellow;
-    margin: 0;
-    width: 100%;
+    margin-left: 200px;
+    width: calc(100vw-200px);
     height: 500px;
 }
 
@@ -116,19 +146,4 @@ body {
 article {
     overflow: scroll;
     text-align: center;
-}
-
-footer {
-    background-color: #9271C2;
-    width: 100%;
-    height: 25px;
-    color: #FFF2FF;
-}
-.standard {
-    color: #FFF2FF;
-    text-align: center;
-}
-.creator {
-    float: right;
-    color: inherit;
 }
