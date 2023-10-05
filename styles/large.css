@@ -1,18 +1,18 @@
-/* https://www.canva.com/colors/color-palettes/october-skies/ 
-#9271C2 - special
-#2D1674 - 30
-#FFF2FF - 60
-#703ACF - 10
-*/
+:root {
+    --main-color: #FFF2FF;
+    --secondary: #2D1674;
+    --tertiary: #703ACF;
+    --special: #1a1a1a;
+}
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-color: #FFF2FF;    
+    background-color: var(--special);    
     margin: 0;
-    padding: 5px 20px;
+    padding: 5px;
     height: 100%;
 }
 
@@ -20,36 +20,33 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #2D1674;
+    visibility: hidden;
+    background-color: var(--secondary);
     margin: 0;
-    border: 5px inset #703ACF;
+    border: 5px inset var(--tertiary);
+    border-radius: 10px;
     padding: 8px;
     width: 200px;
     height: 100%;
-    color: #FFF2FF;
+    color: var(--main-color);
     overflow: scroll;
     overscroll-behavior: contain;
     z-index: 1;
 }
-.nav-ctrl {
-    margin: 15px 0;
-    padding: 0;
+.nav-title {
     width: 100%;
-    list-style-type: none;
-    gap: 1em;
-}
-#nav-toggle {
-    float: right;
+    text-align: center;
 }
 .nav-item {
-    background-color: #703ACF;
+    background-color: var(--tertiary);
     margin: 15px 0;
     border: 1px outset;
+    border-radius: 3px;
     user-select: none; 
     cursor: pointer;
 }
 .nav-list {
-    background-color: #FFF2FF;
+    background-color: var(--main-color);
     margin: 5px;
     padding: 5px;
     max-height: 10rem;
@@ -61,20 +58,18 @@ body {
 .nav-list li { 
     margin: 2px;
     padding-left: 2px;
-    color: #2D1674 ;
+    color: var(--secondary);
 }
 .nav-list li:hover {  
-    background-color: #2D1674;
-    color: #FFF2FF;
+    background-color: var(--secondary);
+    color: var(--main-color);
 }
 footer {
-    background-color: #2D1674;
     height: 25px;
-    color: #FFF2FF;
     text-align: center;
 }
 .standard {
-    color: #FFF2FF;
+    color: var(--main-color);
     text-align: center;
 }
 .creator {
@@ -83,25 +78,46 @@ footer {
 }
 
 .reference {
-    margin-left: 200px;
-    width: calc(100vw-200px);
-    height: 500px;
+    color: var(--secondary);
 }
+.ref-menu {
+    display: flex;
+    align-items: center;
+    background-color: var(--tertiary);
+    border-radius: 10px;
+    padding: 0 10px;
+    height: 50px;
+    color: var(--main-color);
+}
+#nav-toggle {
+    background-color: var(--tertiary);
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 1px;
+    color: var(--main-color);
+    font-size: large;
+    cursor: pointer;
+} #nav-toggle:hover { filter: sepia(100%);}
+.ref-title{
+    margin-left: 50px;
+    text-align: left;
+}
+.ref-search {
+    margin: 0 20px;
+    text-align: left;
+}
+#dir-search {
+    background-color: var(--main-color);
+    border: double;
+    width: 25rem;
+    font-size: larger;
+}
+
 
 .directory {
     overflow: scroll;
     height: 100%;
     counter-reset: category-count;
-}
-
-.ref-search {
-    margin: 10px;
-    text-align: center;
-}
-#dir-search {
-    border: double;
-    width: 50%;
-    font-size: larger;
 }
 
 .category {

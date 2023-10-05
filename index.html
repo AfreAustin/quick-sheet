@@ -15,11 +15,10 @@
   <meta name="Description" content="Reference for various computer languages and concepts" />
 </head>
 <body>
-  <nav class="side-nav">
-    <menu class="nav-ctrl">
-      <li id="nav-toggle" onclick="toggleNav()">&#x25C4;</li>
-      <li>QUICK SHEETS</li>
-    </menu>
+  <nav class="side-nav" id="side-nav">
+    <header class="nav-title">
+      <strong>QUICK SHEETS</strong>
+    </header>
     <hr />
     <details class="nav-item">
       <summary>Web Development</summary>
@@ -75,25 +74,20 @@
     </footer>
   </nav>
   <main class="reference">
-    <header>
-      <h1 class="ref-title">Web Development: HTML Reference</h1>
-    </header>
-  
-    <dl class="directory">
-      <search class="ref-search"> 
+    <menu class="ref-menu" id="ref-menu">
+      <button id="nav-toggle" onclick="toggleNav()">&#9776;</button>
+      <h1 class="ref-title" id="ref-title">HTML</h1>
+      <search class="ref-search">
         <input id="dir-search" type="search" placeholder="Q Search..."  oninput="filterDirectory()" />
       </search>
-
+    </menu>
+    
+    <dl class="directory">
       <section class="category">
         <h2>Category</h2>
-
         <div class="term">
           <dt class="cmd">Command</dt>
           <dd class="def">Short Description</dd>
-        </div>
-        <div class="term">
-          <dt class="cmd">Command</dt>
-          <dd class="def">Short Description that goes on and on and on and on and on and on</dd>
         </div>
         <div class="term">
           <dt class="cmd">Command</dt>
@@ -103,8 +97,107 @@
           <dt class="cmd">Command</dt>
           <dd class="def">Short Description</dd>
         </div>
-
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
       </section>
+      <section class="category">
+        <h2>Category</h2>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+      <section class="category">
+        <h2>Category</h2>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+      <section class="category">
+        <h2>Category</h2>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+      <section class="category">
+        <h2>Category</h2>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+      <section class="category">
+        <h2>Category</h2>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+        <div class="term">
+          <dt class="cmd">Command</dt>
+          <dd class="def">Short Description</dd>
+        </div>
+      </section>
+
     </dl>
     
     <dialog id="details">
@@ -118,7 +211,38 @@
   </main>
 
   <script>
+    // adds onclick event to all <li> elements in side navigation
+    // click event triggers reference sheet swap
+    const listItems = document.getElementById("side-nav").getElementsByTagName("li");
+    for (let i = 0; i < listItems.length; i++) {
+      listItems.item(i).addEventListener("click", function(){
+        let sheet = listItems.item(i).innerText.trim();
 
+        document.getElementById("ref-title").innerText = sheet;
+      }, false);
+    }
+
+    // toggle side navigation
+    function toggleNav() {
+      let sideNav = document.getElementById("side-nav");
+      let visibility = window.getComputedStyle(sideNav).visibility;
+
+      if (visibility == "visible") {
+        sideNav.style.visibility = "hidden";
+        document.getElementById("nav-toggle").style.visibility = "visible";
+        document.getElementById("ref-menu").style.marginLeft = "0";
+      } else {
+        sideNav.style.visibility = "visible";
+        document.getElementById("ref-menu").style.marginLeft = "200px";
+      }
+
+      return;
+    }
+
+    function filterDirectory() {
+      console.log("TO BE IMPLEMENTED");
+      return;
+    }
   </script>
   <noscript>JavaScript not supported :/</noscript>
 </body>
