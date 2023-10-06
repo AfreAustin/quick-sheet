@@ -17,7 +17,7 @@
 <body>
   <div class="site">
     <aside class="side-nav" id="side-nav">
-      <button id="nav-toggle" onclick="toggleNav()">&#9776;</button>
+      <button class="side-toggle" id="nav-toggle" onclick="toggleNav()"></button>
       <strong class="nav-title" id="nav-title">QUICK SHEETS</strong>
       <hr />
       <nav id="nav-content">
@@ -69,124 +69,130 @@
       </nav>
       <hr />
       <footer class="nav-foot" id="nav-footer">
-        <a class="standard" href="https://html.spec.whatwg.org/multipage/">
-          HTML Standard
-        </a>
         <address class="creator">created by AfreAustin</address>
       </footer>
     </aside>
 
-    <main class="reference" >
+    <main class="reference">
       <menu class="ref-menu" id="ref-menu">
         <h1 class="ref-title" id="ref-title">HTML</h1>
         <search class="ref-search">
-          <input id="dir-search" type="search" placeholder="Q Search..." oninput="filterDirectory()" />
+          <input id="dir-search" type="search" placeholder="Search..." oninput="filterDirectory()" />
         </search>
-        <span style="margin-left: 20px;">TOOLS</span>
+        <span class="ref-tools" style="margin-left: 20px;">TOOLS</span>
       </menu>
       
       <dl class="directory">
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
+        <a class="standard" id="standard" href="https://html.spec.whatwg.org/multipage/">
+          Original Reference
+        </a>
 
+        <section class="category">
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+        </section>
+        <section class="category">
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+        </section>
       </dl>
     </main>
 
-    <article class="term-details">
-      <h2>Tag</h2>
-      <p>Definition</p>
-      
-      <cite><a href="#">Reference</a></cite>
+    <article class="term-details" id="term-details">
+      <button class="side-toggle" id="term-toggle" onclick="toggleTerm()"></button>
+      <header class="detail-header" id="detail-header">
+        <h2 class="detail-title" id="detail-title">SELECT OPTION FROM LIST</h2>
+        <h3 class="detail-definition" id="detail-definition">Full Description is shown here</h3>
+      </header>
+      <p class="detail-info" id="detail-info">More information is shown here</p>
+      <hr />
+      <cite class="detail-ref" id="detail-ref">
+        <a class="detail-link" id="detail-link" href="#">Reference</a>
+      </cite>
     </article>
   </div>
   <script>
@@ -228,14 +234,39 @@
       return;
     }
 
+    function toggleTerm() {
+      let article = document.getElementById("term-details");
+      let head = document.getElementById("detail-header");
+      let info = document.getElementById("detail-info");
+      let ref = document.getElementById("detail-ref");
+
+      let currWidth = window.getComputedStyle(article).width;
+      
+      if (currWidth != "50px") {
+        head.style.display = "none";
+        info.style.display = "none";
+        ref.style.display = "none";
+        article.style.flexBasis = "50px";
+      } else {
+        head.style.display = "initial";
+        info.style.display = "initial";
+        ref.style.display = "initial";
+        article.style.flexBasis = "40%";
+      }
+
+      return;
+    }
+
     // filter reference directory to show what is searched
     function filterDirectory() {
       console.log("TO BE IMPLEMENTED");
       return;
     }
   </script>
-  <noscript>JavaScript not supported :/</noscript>
-  
+  <noscript>
+    JavaScript not supported :/
+    Download the print reference instead...
+  </noscript>
 </body>
 </html>
 
