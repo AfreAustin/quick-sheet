@@ -82,120 +82,99 @@
         <search class="ref-search">
           <input id="dir-search" type="search" placeholder="Q Search..." oninput="filterDirectory()" />
         </search>
+        <span style="margin-left: 20px;">TOOLS</span>
       </menu>
       
       <dl class="directory">
         <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-        </section>
-        <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
         </section>
         <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-        </section>
-        <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
         </section>
         <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
         </section>
         <section class="category">
-          <h2>Category</h2>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <h2 class="category-title">Category</h2>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term">
-            <dt class="cmd">Command</dt>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
+            <dd class="def">Short Description</dd>
+          </div>
+          <div class="term-bubble">
+            <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
         </section>
@@ -216,7 +195,8 @@
     const listItems = document.getElementById("side-nav").getElementsByTagName("li");
     for (let i = 0; i < listItems.length; i++) {
       listItems.item(i).addEventListener("click", function(){
-        let sheet = listItems.item(i).innerText.trim();
+        let title = listItems.item(i).innerText.trim().split(" ");
+        let sheet = title[0];
 
         document.getElementById("ref-title").innerText = sheet;
       }, false);
