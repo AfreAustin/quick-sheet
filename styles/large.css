@@ -28,6 +28,7 @@ body {
     padding: 8px;
     overflow: scroll;
     overscroll-behavior: contain;
+    transition: 0.5s;
 }
 .reference {
     display: block;
@@ -46,6 +47,7 @@ body {
     padding: 8px;
     text-align: center;
     overscroll-behavior: contain;
+    transition: 0.5s;
 }
 .side-toggle {
     background-color: var(--tertiary);
@@ -77,9 +79,17 @@ body {
     position: absolute;
     right: 0;
     content: "\25BC";
+    transition: 0.5s;
 }
 .nav-item[open] > summary:after {
     transform: rotate(180deg);
+}
+.nav-item[open] > summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 .nav-list {
     background-color: var(--secondary);
@@ -95,6 +105,8 @@ body {
     margin: 2px;
     padding-left: 2px;
     color: var(--main-color);
+    transition: 100ms;
+
 }
 .nav-list li:hover {  
     background-color: var(--main-color);
@@ -175,7 +187,8 @@ body {
     overflow-wrap: break-word;
     text-align: center;
     cursor: pointer;
-    }
+    transition: 250ms;
+}
 .category .term-bubble:hover {
     background-color: var(--secondary);
     border: 3px dashed var(--tertiary);
