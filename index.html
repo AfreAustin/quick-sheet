@@ -93,14 +93,6 @@
             <dt class="term">Command</dt>
             <dd class="def">Short Description</dd>
           </div>
-          <div class="term-bubble">
-            <dt class="term">Notcom</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Maybe</dt>
-            <dd class="def">Short Description</dd>
-          </div>
         </section>
       </dl>
     </main>
@@ -128,6 +120,20 @@
         let sheet = title[0];
 
         document.getElementById("ref-title").innerText = sheet;
+      }, false);
+    }
+
+    // adds onclick event to all elements with term-bubble class
+    // click event triggers details swap
+    const listTerms = document.getElementById("directory").getElementsByClassName("term-bubble");
+    for (let i = 0; i < listTerms.length; i++) {
+      let currBubble = listTerms.item(i); 
+      currBubble.addEventListener("click", function(){
+        let currTerm = currBubble.children;
+        let detail = document.getElementById("term-details");
+
+        document.getElementById("detail-title").innerText = currTerm.item(0).innerText;
+        document.getElementById("detail-definition").innerText = currTerm.item(1).innerText;
       }, false);
     }
 
@@ -193,8 +199,6 @@
 
       return;
     }
-
-
   </script>
   <noscript>
     JavaScript not supported :/
@@ -230,4 +234,46 @@
         </tfoot>
       </table>
 
+-->
+<!--
+
+    // populate directory with reference's terms (ES6+)
+    let temp = {
+      category: "Information",
+      term: "Command2",
+      definition: "Short Description2"
+    };
+    const refTerms = [temp, temp];
+    let directory = document.getElementById("directory");
+    refTerms.forEach(transferTerms);
+
+    function transferTerms(item) {
+      const categoryElem = document.createElement("section");
+      const catTitleElem = document.createElement("h2");
+      const bubbleElem = document.createElement("div");
+      const termElem = document.createElement("dt");
+      const defElem = document.createElement("dd");
+
+      categoryElem.setAttribute("class", "category");
+      catTitleElem.setAttribute("class", "category-title");
+      bubbleElem.setAttribute("class", "term-bubble");
+      termElem.setAttribute("class", "term");
+      defElem.setAttribute("class", "def");
+
+      let sections = directory.getElementsByClassName("category");
+      sections.forEach(function(category) {
+         console.log()
+      });
+      directory.appendChild(categoryElem);
+      categoryElem.appendChild(catTitleElem);
+      catTitleElem.innerText = item.category;
+
+        categoryElem.appendChild(bubbleElem);
+        bubbleElem.appendChild(termElem);
+        termElem.innerText = item.term;
+        bubbleElem.appendChild(defElem);
+        defElem.innerText = item.definition;
+
+      // process more information
+    }
 -->
