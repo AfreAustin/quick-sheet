@@ -147,6 +147,7 @@ body {
     width: 100%;
     color: var(--main-color);
     font-size: larger;
+    accent-color: var(--main-color);
 }
 .ref-tools {
     border: solid;

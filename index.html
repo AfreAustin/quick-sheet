@@ -82,7 +82,7 @@
         <span class="ref-tools" style="margin-left: 20px;">TOOLS</span>
       </menu>
       
-      <dl class="directory">
+      <dl class="directory" id="directory">
         <a class="standard" id="standard" href="https://html.spec.whatwg.org/multipage/">
           Original Reference
         </a>
@@ -94,88 +94,11 @@
             <dd class="def">Short Description</dd>
           </div>
           <div class="term-bubble">
-            <dt class="term">Command</dt>
+            <dt class="term">Notcom</dt>
             <dd class="def">Short Description</dd>
           </div>
           <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
+            <dt class="term">Maybe</dt>
             <dd class="def">Short Description</dd>
           </div>
         </section>
@@ -259,9 +182,19 @@
 
     // filter reference directory to show what is searched
     function filterDirectory() {
-      console.log("TO BE IMPLEMENTED");
+      let search = document.getElementById("dir-search").value;
+      let directory = document.getElementById("directory").getElementsByClassName("term");
+
+      for (let i = 0; i < directory.length; i++) {
+        let matching = directory.item(i).innerText.toUpperCase().match(search.toUpperCase());
+        if (matching) directory.item(i).parentElement.style.display = "initial";
+        else directory.item(i).parentElement.style.display = "none";
+      }
+
       return;
     }
+
+
   </script>
   <noscript>
     JavaScript not supported :/
