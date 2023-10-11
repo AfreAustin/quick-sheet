@@ -83,17 +83,9 @@
       </menu>
       
       <dl class="directory" id="directory">
-        <a class="standard" id="standard" href="https://html.spec.whatwg.org/multipage/">
+        <!--<a class="standard" id="standard" href="https://html.spec.whatwg.org/multipage/">
           Original Reference
-        </a>
-
-        <section class="category">
-          <h2 class="category-title">Category</h2>
-          <div class="term-bubble">
-            <dt class="term">Command</dt>
-            <dd class="def">Short Description</dd>
-          </div>
-        </section>
+        </a> -->
       </dl>
     </main>
 
@@ -123,6 +115,63 @@
       }, false);
     }
 
+    let temp = {
+      category: "Information",
+      term: "Source",
+      definition: "Original Reference"
+    };
+    let temp2 = {
+      category: "Actual",
+      term: "Command3",
+      definition: "Short Description3"
+    };
+
+    // populate directory with reference's terms (ES6+)
+    const refTerms = [temp, temp2];
+    let directory = document.getElementById("directory");
+
+    refTerms.forEach(function(term) {
+      console.log(term.category);
+      let sections = directory.children;
+      let exists = false;
+
+      for (i = 0; i < sections.length; i++) {
+        let category = sections.item(i).firstElementChild.innerText; 
+        if (category.toUpperCase() == term.category.toUpperCase()) exists = true;
+      }
+
+      if (exists == false) {
+        const categoryElem = document.createElement("section");
+        const catTitleElem = document.createElement("h2");
+
+        categoryElem.setAttribute("class", "category");
+        catTitleElem.setAttribute("class", "category-title");
+
+        directory.appendChild(categoryElem);
+        categoryElem.appendChild(catTitleElem);
+        catTitleElem.innerText = term.category;
+      }
+
+      for (i = 0; i < sections.length; i++) {
+        if (term.category.toUpperCase() == sections.item(i).firstElementChild.innerText.toUpperCase()) {
+          const bubbleElem = document.createElement("div");
+          const termElem = document.createElement("dt");
+          const defElem = document.createElement("dd");
+
+          bubbleElem.setAttribute("class", "term-bubble");
+          termElem.setAttribute("class", "term");
+          defElem.setAttribute("class", "def");
+
+          sections.item(i).appendChild(bubbleElem);
+          bubbleElem.appendChild(termElem);
+          termElem.innerText = term.term;
+          bubbleElem.appendChild(defElem);
+          defElem.innerText = term.definition;
+
+        }
+      }
+    });
+    
     // adds onclick event to all elements with term-bubble class
     // click event triggers details swap
     const listTerms = document.getElementById("directory").getElementsByClassName("term-bubble");
@@ -234,46 +283,4 @@
         </tfoot>
       </table>
 
--->
-<!--
-
-    // populate directory with reference's terms (ES6+)
-    let temp = {
-      category: "Information",
-      term: "Command2",
-      definition: "Short Description2"
-    };
-    const refTerms = [temp, temp];
-    let directory = document.getElementById("directory");
-    refTerms.forEach(transferTerms);
-
-    function transferTerms(item) {
-      const categoryElem = document.createElement("section");
-      const catTitleElem = document.createElement("h2");
-      const bubbleElem = document.createElement("div");
-      const termElem = document.createElement("dt");
-      const defElem = document.createElement("dd");
-
-      categoryElem.setAttribute("class", "category");
-      catTitleElem.setAttribute("class", "category-title");
-      bubbleElem.setAttribute("class", "term-bubble");
-      termElem.setAttribute("class", "term");
-      defElem.setAttribute("class", "def");
-
-      let sections = directory.getElementsByClassName("category");
-      sections.forEach(function(category) {
-         console.log()
-      });
-      directory.appendChild(categoryElem);
-      categoryElem.appendChild(catTitleElem);
-      catTitleElem.innerText = item.category;
-
-        categoryElem.appendChild(bubbleElem);
-        bubbleElem.appendChild(termElem);
-        termElem.innerText = item.term;
-        bubbleElem.appendChild(defElem);
-        defElem.innerText = item.definition;
-
-      // process more information
-    }
 -->
