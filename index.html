@@ -15,11 +15,20 @@
   <meta name="Description" content="Reference for various computer languages and concepts" />
 </head>
 <body>
+  <header class="site-header">
+    <strong class="header-title" id="nav-title">
+      <!--<img src="logo.png" alt="Quick Sheets Logo" /> -->
+      QUICK SHEETS
+    </strong>
+    <search class="header-search">
+      <input id="dir-search" type="search" placeholder="Search HTML" oninput="filterDirectory()" />
+    </search>
+    <address class="creator">created by AfreAustin</address>
+  </header>
+
   <div class="site">
     <aside class="side-nav" id="side-nav">
-      <button class="side-toggle" id="nav-toggle" onclick="toggleNav()"></button>
-      <strong class="nav-title" id="nav-title">QUICK SHEETS</strong>
-      <hr />
+      <!--<button class="side-toggle" id="nav-toggle" onclick="toggleNav()"></button>-->
       <nav id="nav-content">
         <details class="nav-item">
           <summary>Web Development</summary>
@@ -67,18 +76,13 @@
           </ul>
         </details>
       </nav>
-      <hr />
       <footer class="nav-foot" id="nav-footer">
-        <address class="creator">created by AfreAustin</address>
+        
       </footer>
     </aside>
 
     <main class="reference">
       <menu class="ref-menu" id="ref-menu">
-        <h1 class="ref-title" id="ref-title">HTML</h1>
-        <search class="ref-search">
-          <input id="dir-search" type="search" placeholder="Search..." oninput="filterDirectory()" />
-        </search>
         <span class="ref-tools" style="margin-left: 20px;">TOOLS</span>
       </menu>
       
@@ -105,13 +109,13 @@
   <script>
     // adds onclick event to all <li> elements in side navigation
     // click event triggers reference sheet swap
-    const listItems = document.getElementById("side-nav").getElementsByTagName("li");
+    const listItems = document.querySelectorAll("#side-nav li");
     for (let i = 0; i < listItems.length; i++) {
       listItems.item(i).addEventListener("click", function(){
         let title = listItems.item(i).innerText.trim().split(" ");
         let sheet = title[0];
 
-        document.getElementById("ref-title").innerText = sheet;
+        document.getElementById("dir-search").placeholder = "Search " + sheet;
       }, false);
     }
 
@@ -191,19 +195,16 @@
     // if currently collapsed, show all elements  
     function toggleNav() {
       let sideNav = document.getElementById("side-nav");
-      let title = document.getElementById("nav-title");
       let nav = document.getElementById("nav-content");
       let foot = document.getElementById("nav-footer");
 
       let currWidth = window.getComputedStyle(sideNav).width;
       
       if (currWidth == "200px") {
-        title.style.display = "none";
         nav.style.display = "none";
         foot.style.display = "none";
         sideNav.style.flexBasis = "50px";
       } else {
-        title.style.display = "initial";
         nav.style.display = "initial";
         foot.style.display = "initial";
         sideNav.style.flexBasis = "200px";
