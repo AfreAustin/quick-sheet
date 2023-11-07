@@ -2,7 +2,6 @@
     --main-color: #2D1674;
     --secondary: #FFF2FF;
     --tertiary: #703ACF;
-    --special: #1a1a1a;
 }
 
 * {
@@ -11,7 +10,7 @@
 
 body {
     /* filter: sepia(20%) brightness(85%); use for night light*/
-    background-color: var(--special);
+    background-color: var(--main-color);
     margin: 0 5px;
     height: 100vh;
 }

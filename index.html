@@ -6,7 +6,7 @@
 <!--  <link media="screen and (max-width: 600px)" href="styles/x-small.css" type="text/css" rel="stylesheet" />
   <link media="screen and (min-width: 600px)" href="styles/small.css" type="text/css" rel="stylesheet" />
   <link media="screen and (min-width: 768px)" href="styles/medium.css" type="text/css" rel="stylesheet" /> -->
-  <link media="screen and (min-width: 992px)" href="styles/large.css" type="text/css" rel="stylesheet" /> <!-- laptops/desktops -->
+  <link href="styles.css" type="text/css" rel="stylesheet" /> <!-- laptops/desktops -->
 <!--  <link media="screen and (min-width: 1200px)" href="styles/x-large.css" type="text/css" rel="stylesheet" /> -->
   
   <meta charset="utf-8" />
@@ -115,6 +115,7 @@
       }, false);
     }
 
+    // convert terms from JSON to objects
     let temp = {
       category: "Information",
       term: "Source",
@@ -125,11 +126,10 @@
       term: "Command3",
       definition: "Short Description3"
     };
+    const refTerms = [temp, temp2];
 
     // populate directory with reference's terms (ES6+)
-    const refTerms = [temp, temp2];
     let directory = document.getElementById("directory");
-
     refTerms.forEach(function(term) {
       console.log(term.category);
       let sections = directory.children;
@@ -255,32 +255,3 @@
   </noscript>
 </body>
 </html>
-
-<!--
-      <table>
-        <caption>HTML Tags</caption>
-        <colgroup>
-          <col span="2" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>Tag</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>HTML-Tag</td>
-            <td>Tag-Description</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2">
-              <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
--->
