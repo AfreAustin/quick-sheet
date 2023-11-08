@@ -24,6 +24,7 @@ body {
 .site {
     display: flex;
     position: relative;
+    height: 90vh;
     color: var(--secondary);
 }
 /* TODO: change to min-wdth: 992px with flex-direction: row */
@@ -31,40 +32,44 @@ body {
     .site {
         flex-direction: column;
     }
+    .side-nav {
+        height: 20px;
+    }
+    .reference {
+        flex: 1 0 60%;
+    }
+    .directory {
+        flex: 1 0 30%;
+    }
 }
 
 .side-nav {
-    display: flex;
-    position: sticky;
-    top: 0;
-    left: 0;
-    border-right: 1px solid var(--tertiary);
+    display: block;
+    flex: 1 0 200px;
     border-bottom: 1px solid var(--tertiary);
     overflow: scroll;
     overscroll-behavior: contain;
     flex-direction: column;
-    flex-basis: 200px;
-    height: max-content;
 }
 .reference {
     display: block;
-    flex: 2 0 100px;
-    margin: 0 10px;
-    border-radius: 10px;
+    flex: 1 0 60%;
     overflow: scroll;
+    border-left: 1px solid var(--tertiary);
+    border-right: 1px solid var(--tertiary);
+    padding: 5px;
     overscroll-behavior: contain;
-}
-.term-details {
-    flex: 0 1 40%;
-    overflow: scroll;
-    background-color: var(--main-color);
-    border: 5px outset var(--tertiary);
-    border-radius: 10px;
-    padding: 8px;
     text-align: center;
-    overscroll-behavior: contain;
     transition: 0.5s;
 }
+.directory {
+    flex: 0 1 30%;
+    justify-content: center;
+    overflow: scroll;
+    overscroll-behavior: contain;
+    padding: 5px;
+}
+
 .side-toggle {
     background-color: var(--tertiary);
     margin: 0 2px;
@@ -144,47 +149,24 @@ body {
 }
 
 /* reference items */
-.ref-menu {
-    display: flex;
-    position: sticky;
-    top: 0;
-    align-items: center;
-    background-color: var(--tertiary);
-    border-bottom: 1px solid var(--main-color);
-    margin: 0;
-    border-radius: 10px 10px 0 0;
-    padding: 10px;
+.ref-link {
     color: var(--secondary);
+    text-decoration: underline dashed;
 }
-.ref-tools {
-    border: solid;
-}
-.directory {
-    justify-content: center;
-    overflow: scroll;
-    background-color: var(--main-color);
-    margin: 0;
-    border-radius: 0 0 10px 10px;
-    padding: 10px;
-    counter-reset: category-count;
-}
-.standard {
-    display: block;
-    color: var(--secondary);
-    text-align: center;
-}
+
+/* directory items */
 .category {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
+    gap: 3px;
+    padding-bottom: 10px;
 }
 .category .category-title {
+    margin: 0;
+    border-top: 1px dashed var(--secondary);
+    padding-bottom: 5px;
     width: 100%;
-}
-.category .category-title::before {
-    counter-increment: category-count;
-    content: counter(category-count) ". ";
 }
 .category .term-bubble {
     flex: 0 1 30%;
@@ -195,7 +177,7 @@ body {
     overflow-wrap: break-word;
     text-align: center;
     cursor: pointer;
-    transition: 250ms;
+    transition: 100ms;
 }
 .category .term-bubble:hover {
     background-color: var(--secondary);
@@ -208,31 +190,4 @@ body {
 }
 .category .def {
     margin-left: 0px;
-}
-
-/* term-details items */
-#term-toggle {
-    float: right;
-    clear: left;
-    margin: 0;
-    width: 25px;
-    text-align: center;
-}
-.detail-header {
-    text-align: center;
-}
-.detail-title {
-    text-align: center;
-}
-.detail-definition {
-    text-align: center;
-}
-.detail-info {
-    text-align: center;
-}
-.detail-ref {
-    text-align: center;
-}
-.detail-link {
-    color: var(--secondary);
 }
