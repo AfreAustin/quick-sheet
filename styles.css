@@ -13,17 +13,6 @@ body {
     background-color: var(--main-color);
     padding: 5px;
 }
-.site {
-    display: flex;
-    color: var(--secondary)
-}
-/* TODO: change to min-wdth: 992px with flex-direction: row */
-@media screen and (max-width: 992px) {
-    .site {
-        flex-direction: column;
-    }
-}
-
 .site-header {
     display: flex;
     border-bottom: 1px solid var(--tertiary);
@@ -32,12 +21,30 @@ body {
     align-items: center;
     color: var(--secondary);
 }
+.site {
+    display: flex;
+    position: relative;
+    color: var(--secondary);
+}
+/* TODO: change to min-wdth: 992px with flex-direction: row */
+@media screen and (max-width: 992px) {
+    .site {
+        flex-direction: column;
+    }
+}
+
 .side-nav {
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
     border-right: 1px solid var(--tertiary);
-    padding: 10px;
+    border-bottom: 1px solid var(--tertiary);
     overflow: scroll;
     overscroll-behavior: contain;
-    transition: 0.5s;
+    flex-direction: column;
+    flex-basis: 200px;
+    height: max-content;
 }
 .reference {
     display: block;
@@ -94,10 +101,11 @@ body {
 .nav-item {
     position: relative;
     background-color: var(--tertiary);
-    margin: 15px 0;
+    margin: 15px 5px 15px 0;
     border: 1px outset;
-    border-radius: 3px;
-    user-select: none; 
+    border-radius: 5px;
+    padding: 3px;
+    user-select: none;
     cursor: pointer;
 }
 .nav-item summary {
@@ -106,20 +114,14 @@ body {
 .nav-item summary::after {
     display: inline-block;
     position: absolute;
-    right: 0;
+    right: 5px;
     content: "\25BC";
-    transition: 0.5s;
+    transition: 400ms;
 }
 .nav-item[open] > summary:after {
     transform: rotate(180deg);
 }
-.nav-item[open] > summary ~ * {
-    animation: sweep .5s ease-in-out;
-}
-@keyframes sweep {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+/* TODO: add animation to opening */
 .nav-list {
     background-color: var(--secondary);
     margin: 5px;
@@ -134,19 +136,11 @@ body {
     margin: 2px;
     padding-left: 2px;
     color: var(--main-color);
-    transition: 100ms;
-
+    transition: 50ms;
 }
 .nav-list li:hover {  
     background-color: var(--main-color);
     color: var(--secondary);
-}
-.nav-foot {
-    height: 25px;
-    text-align: center;
-}
-.creator {
-    text-align: right;
 }
 
 /* reference items */
