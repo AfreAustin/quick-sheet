@@ -1,18 +1,16 @@
+* {
+    box-sizing: border-box;
+}
 :root {
     --main-color: #2D1674;
     --secondary: #FFF2FF;
     --tertiary: #703ACF;
 }
-
-* {
-    box-sizing: border-box;
-}
-
 body {
-    /* filter: sepia(20%) brightness(85%); use for night light*/
     background-color: var(--main-color);
     padding: 5px;
 }
+
 .site-header {
     display: flex;
     border-bottom: 1px solid var(--tertiary);
@@ -27,43 +25,27 @@ body {
     height: 90vh;
     color: var(--secondary);
 }
-/* TODO: change to min-wdth: 992px with flex-direction: row */
-@media screen and (max-width: 992px) {
-    .site {
-        flex-direction: column;
-    }
-    .side-nav {
-        height: 20px;
-    }
-    .reference {
-        flex: 1 0 60%;
-    }
-    .directory {
-        flex: 1 0 30%;
-    }
-}
-
 .side-nav {
     display: block;
     flex-direction: column;
-    flex: 1 0 200px;
+    flex: 0.5 200px;
     border-bottom: 1px solid var(--tertiary);
     overflow: scroll;
     overscroll-behavior: contain;
 }
 .reference {
     display: block;
-    flex: 1 0 60%;
+    flex: 2 60%;
     overflow: scroll;
     border-left: 1px solid var(--tertiary);
     border-right: 1px solid var(--tertiary);
-    padding: 5px;
+    padding: 5px 20px;
     text-align: center;
     overscroll-behavior: contain;
     transition: 0.5s;
 }
 .directory {
-    flex: 0 1 30%;
+    flex: 1 30%;
     justify-content: center;
     overflow: scroll;
     margin: 0;
@@ -71,24 +53,23 @@ body {
     padding: 0 10px;
     overscroll-behavior: contain;
 }
-
-.side-toggle {
-    background-color: var(--tertiary);
-    margin: 0 2px;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 1px;
-    color: var(--secondary);
-    font-size: large;
-    cursor: pointer;
-} .side-toggle:hover { filter: invert(100%); 
-} .side-toggle::before { content: "\2630"; }
+/* TODO: change to min-wdth: 992px with flex-direction: row for mobile-first */
+@media screen and (max-width: 992px) {
+    .site {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .reference {
+        border-left: 3px solid var(--tertiary);
+        border-right: 3px solid var(--tertiary);
+    }
+    .directory {
+        border-top: 1px solid var(--tertiary);
+    }
+}
 
 /* site-header items */
 .header-title {
-    background-color: var(--tertiary);
-    border: 1px inset var(--secondary);
-    border-radius: 50px;
     padding: 5px
 }
 .header-search {
@@ -114,6 +95,7 @@ body {
     padding: 3px;
     user-select: none;
     cursor: pointer;
+    transition: 100ms;
 }
 .nav-item summary {
     display: block;
@@ -133,11 +115,10 @@ body {
     background-color: var(--secondary);
     margin: 5px;
     padding: 5px;
-    max-height: 10rem;
+    max-height: 7rem;
     overflow: scroll;
     list-style-type: none;
     gap: 1em;
-    overscroll-behavior: contain;
 }
 .nav-list li { 
     margin: 2px;
@@ -152,8 +133,26 @@ body {
 
 /* reference items */
 .ref-link {
+    float: left;
+    background-color: var(--tertiary);
+    border: 2px outset var(--secondary);
+    border-radius: 25%;
+    padding: 5px;
     color: var(--secondary);
     text-decoration: underline dashed;
+}
+.edit-button {
+    float: right;
+    box-shadow: 1px 1px;
+    background-color: var(--tertiary);
+    border-radius: 50%;
+    padding: 5px 10px;
+    color: var(--secondary);
+    font-size: x-large;
+    cursor: pointer;
+}
+.edit-button::after {
+    content: "\270E";
 }
 
 /* directory items */
@@ -172,12 +171,17 @@ body {
 }
 .category {
     margin-bottom: 10px;
+    border-top: 1px dashed var(--secondary);
 }
 .category .category-title {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--main-color);
     margin: 0;
-    border-top: 1px dashed var(--secondary);
+    border-bottom-right-radius: 10px;
     padding-bottom: 5px;
-    width: 100%;
+    width: max-content;
 }
 .category .term-bubble {
     background-color: var(--tertiary);
