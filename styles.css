@@ -45,11 +45,11 @@ body {
 
 .side-nav {
     display: block;
+    flex-direction: column;
     flex: 1 0 200px;
     border-bottom: 1px solid var(--tertiary);
     overflow: scroll;
     overscroll-behavior: contain;
-    flex-direction: column;
 }
 .reference {
     display: block;
@@ -58,16 +58,18 @@ body {
     border-left: 1px solid var(--tertiary);
     border-right: 1px solid var(--tertiary);
     padding: 5px;
-    overscroll-behavior: contain;
     text-align: center;
+    overscroll-behavior: contain;
     transition: 0.5s;
 }
 .directory {
     flex: 0 1 30%;
     justify-content: center;
     overflow: scroll;
+    margin: 0;
+    border-bottom: 1px solid var(--tertiary);
+    padding: 0 10px;
     overscroll-behavior: contain;
-    padding: 5px;
 }
 
 .side-toggle {
@@ -155,12 +157,21 @@ body {
 }
 
 /* directory items */
-.category {
+.toolbar {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 3px;
-    padding-bottom: 10px;
+    gap: 5px;
+    padding: 10px;
+}
+.toolbar > button {
+    background-color: var(--tertiary);
+    border-color: var(--secondary);
+    border-radius: 10px;
+    padding: 5px;
+    color: var(--secondary)
+}
+.category {
+    margin-bottom: 10px;
 }
 .category .category-title {
     margin: 0;
@@ -169,25 +180,23 @@ body {
     width: 100%;
 }
 .category .term-bubble {
-    flex: 0 1 30%;
     background-color: var(--tertiary);
-    border: 3px solid var(--tertiary);
+    margin: 10px 0;
     border-radius: 10px;
     padding: 5px;
-    overflow-wrap: break-word;
     text-align: center;
     cursor: pointer;
-    transition: 100ms;
 }
 .category .term-bubble:hover {
-    background-color: var(--secondary);
-    border: 3px dashed var(--tertiary);
-    color: var(--main-color);
+    opacity: 80%;
 }
 .category .term {
     margin-bottom: 5px;
     font-weight: bold;
 }
 .category .def {
+    overflow: hidden;
     margin-left: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

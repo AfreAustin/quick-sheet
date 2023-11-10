@@ -27,7 +27,7 @@
     <address>created by AfreAustin</address>
   </header>
 
-  <div class="site">
+  <main class="site">
     <aside class="side-nav" id="side-nav">
       <nav id="nav-content">
         <details class="nav-item" open="open">
@@ -88,18 +88,19 @@
       </nav>
     </aside>
 
-    <main class="reference" id="reference">
-      <article>
-        <hgroup class="ref-header" id="ref-header">
-          <cite><a class="ref-link" id="ref-link" href="#">Source</a></cite>
-          <h1 id="ref-title">SELECT AN ITEM IN THE DIRECTORY</h1>
-          <h2 id="ref-desc"></h2>
-        </hgroup>
-        <p id="ref-info"></p>
-      </article>
-    </main>
+    <article class="reference" id="reference">
+      <hgroup id="ref-header">
+        <cite><a class="ref-link" id="ref-link" href="#">Source</a></cite>
+        <h1 id="ref-title">SELECT AN ITEM IN THE DIRECTORY</h1>
+        <h2 id="ref-desc"></h2>
+      </hgroup>
+      <p id="ref-info"></p>
+    </article>
 
     <dl class="directory" id="directory">
+      <menu class="toolbar">
+        <button type="button" onclick="newItem()">ADD</button>
+      </menu>
       <section class="category">
         <h3 class="category-title">Information</h3>
         <div class="term-bubble">
@@ -108,7 +109,7 @@
         </div>
       </section>
     </dl>
-  </div>
+  </main>
   <script>
     // adds onclick event to all <li> elements in side navigation
     // click event swaps reference sheets
@@ -143,16 +144,15 @@
       definition: "Stuff define"
     };
     let temp2 = {
-      category: "Actual",
-      term: "Command3",
-      definition: "Short Description3"
+      category: "New Section",
+      term: "Command",
+      definition: "Command Description"
     };
-    const refTerms = [temp, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2];
+    const refTerms = [temp, temp2];
 
     // populate directory with reference's terms (ES6+)
     let directory = document.getElementById("directory");
     refTerms.forEach(function(term) {
-      console.log(term.category);
       let sections = directory.children;
       let exists = false;
 
@@ -205,50 +205,9 @@
       }, false);
     }
 
-    // toggle side navigation based on current width
-    // if currently shown, hide all elements except toggle button
-    // if currently collapsed, show all elements  
-    function toggleNav() {
-      let sideNav = document.getElementById("side-nav");
-      let nav = document.getElementById("nav-content");
-      let foot = document.getElementById("nav-footer");
-
-      let currWidth = window.getComputedStyle(sideNav).width;
-      
-      if (currWidth == "200px") {
-        nav.style.display = "none";
-        foot.style.display = "none";
-        sideNav.style.flexBasis = "50px";
-      } else {
-        nav.style.display = "initial";
-        foot.style.display = "initial";
-        sideNav.style.flexBasis = "200px";
-      }
-
-      return;
-    }
-
-    function toggleTerm() {
-      let article = document.getElementById("reference");
-      let head = document.getElementById("ref-header");
-      let info = document.getElementById("ref-info");
-      let ref = document.getElementById("detail-ref");
-
-      let currWidth = window.getComputedStyle(article).width;
-      
-      if (currWidth != "50px") {
-        head.style.display = "none";
-        info.style.display = "none";
-        ref.style.display = "none";
-        article.style.flexBasis = "50px";
-      } else {
-        head.style.display = "initial";
-        info.style.display = "initial";
-        ref.style.display = "initial";
-        article.style.flexBasis = "40%";
-      }
-
-      return;
+    // add new item to a reference sheet
+    function newItem() {
+      console.log("TO BE IMPLEMENTED");
     }
 
     // filter reference directory to show what is searched
@@ -261,8 +220,6 @@
         if (matching) directory.item(i).parentElement.style.display = "initial";
         else directory.item(i).parentElement.style.display = "none";
       }
-
-      return;
     }
   </script>
   <noscript>
