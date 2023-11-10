@@ -89,8 +89,10 @@
 
     <article class="reference" id="reference">
       <hgroup id="ref-header">
-        <button class="edit-button" type="button" title="Edit"
-        onclick="editItem()"></button>
+        <button class="floating-button" id="edit-button" title="Edit" 
+        type="button" onclick="editItem()" disabled="disabled">
+          &#x270E;
+        </button>
         <cite>
           <a class="ref-link" id="ref-link" href="#" title="View Original">
             Source
@@ -101,6 +103,10 @@
       </hgroup>
       <p id="ref-info"></p>
     </article>
+
+    <template>
+      Add article template here
+    </template>
 
     <dl class="directory" id="directory">
       <menu class="toolbar">
@@ -123,6 +129,17 @@
       </section>
     </dl>
   </main>
+
+  <dialog class="form-dialog" id="form-dialog">
+    <button class="floating-button" type="button" onclick="toggleDialog()">
+      X
+    </button>
+    <form>
+      <h1 id="form-title"></h1>
+    </form>
+    <button type="submit">SUBMIT</button>
+  </dialog>
+
   <script src="script.js"></script>
   <noscript>
     JavaScript not supported :/ Download the print reference instead...

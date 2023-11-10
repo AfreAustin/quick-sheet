@@ -133,6 +133,7 @@ body {
 
 /* reference items */
 .ref-link {
+    display: none;
     float: left;
     background-color: var(--tertiary);
     border: 2px outset var(--secondary);
@@ -141,7 +142,7 @@ body {
     color: var(--secondary);
     text-decoration: underline dashed;
 }
-.edit-button {
+.floating-button {
     float: right;
     box-shadow: 1px 1px;
     background-color: var(--tertiary);
@@ -151,8 +152,8 @@ body {
     font-size: x-large;
     cursor: pointer;
 }
-.edit-button::after {
-    content: "\270E";
+#edit-button[disabled] {
+    display: none;
 }
 
 /* directory items */
@@ -203,4 +204,17 @@ body {
     margin-left: 0px;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* form dialog box items */
+.form-dialog {
+    position: fixed;
+    z-index: 8;
+    overflow: scroll;
+    background-color: var(--main-color);
+    border: 3px ridge var(--secondary);
+    border-radius: 5%;
+    width: 50%;
+    height: 80%;
+    color: var(--secondary);
 }
