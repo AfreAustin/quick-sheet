@@ -1,0 +1,239 @@
+PHP = Hypertext Preprocessor = Personal Home Page = currently at version 7
+  server-executes return plain HTML, use .php
+  generate dynamic page content, CRUD server files and databases, collect formdata, manage cookies and authentication, encrypt data
+  can output images, PDF files, XHTML, XML
+
+Syntax -------------------------------------------------------------------------------------------
+  not case-sensitive, loosely-typed, ended with ;
+  <?php ?> = surrounds php code; // = # = single-line comment; /* */ = multi-line comment
+  $var denote variables, named with alphanumeric characters, cannot start with number, case-sensitive
+    local scope can only be used locally, 
+    global can only be used outside functions, declare global in function to use
+    static persists after function end
+  const or define() creates constants that cannot be undefined
+    const cant be defined inside another block scope
+  function($params) {} creates functions, with arguments passed by value
+    params can be type cast (*7+) if declare(strict_types=1);
+    set default args with $param = defaultVal; set return type with () : type {}
+    pass by reference with &$param to be able to change value
+
+  datatypes: String, Integer, Float, Boolean, Array, Object, Null, Resource
+    Integer = -2,147,483,648 to 2,147,483,647 for 32-bit, -9223372036854775808 to 9223372036854775807 for 64-bit
+    Float = platform-dependent, use PHP_FLOAT_... (*7.2+), INF returned for values over max, NAN returns
+    array made with array() or define()
+      keys are indexed = numeric, associative = named; multidimensional = index : array
+    resource stores references to external functions and resources
+  PHP provides automatic type conversion, but can be type cast with (type)$var
+  var_dump($var) = return data type and value
+
+  operators: Arithmetic, Assignment, Comparison, Increment, Logical (mix), Conditional Assignment (?:, ??)
+  Conditional: if (cond) ... elseif (cond) ... else, switch (var) { case val: ... default: }
+  loops: while (cond), do {code} ... while (cond), for (iter; cond; incr), foreach ($array as $key => $value), break, continue
+
+  superglobals are predefined PHP global
+    $GLOBALS[index], where index = varName
+      stores all declared globals
+    _SERVER = PHP_SELF, SERVER_NAME, HTTP_HOST, HTTP_REFERRER, HTTP_USER_AGENT, SCRIPT_NAME
+      https://www.w3schools.com/php/php_superglobals_server.asp
+    _REQUEST = collect form data using their names
+    _POST = collect form data sent via post method OR pass variables
+    _GET = collect form data sent via get method OR get from URL
+    _FILES, _ENV, _COOKIE, _SESSION
+
+  echo holds multiple arguments, returns no value, and is marginally faster; print holds one argument, returns 1
+    can be used without function ()
+    echo "string" . $var . "string" = "string $var string"
+  regex = "/regex/mods", where mods: i = case-insensitive, m = multiline, u = matching of UTF-8 encoded patterns
+    metachars, quantifiers, grouping, patterns = https://www.w3schools.com/php/php_regex.asp
+
+Forms --------------------------------------------------------------------------------------------------------
+  use <form action="file.php" method="get|post">
+  both methods create an associative array
+    GET = 2000 char limit, non-sensitive data, passes via URL parameters
+    POST = no limit, sensitive data, supports multi-part binary and other functionalities
+  to retain values, add php to value attribute
+
+  validation is important to security
+    use action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" to send to own page for validation
+      htmlspecialchars() converts special characters to HTML entities (&lt;) to prevent Cross-site Scripting attacks (PHP_SELF exploits)
+    trim() strips unnecessary characters from input data
+    stripslashes() strips backslashes from input data
+    filter_var($email, FILTER_VALIDATE_EMAIL) for emails
+    /\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i for URLS
+  use REQUEST_METHOD to check if form has been submitted, thus needing validation
+
+Advanced ------------------------------------------------------------------------------------------------------
+  include produces a warning and continues script, require throws error and stops script, _once variant runs only once
+
+  Date and Time use date()
+    format param uses d = day, m = month, Y = year, l = weekday, H = 24-hour hour, h = 12-hour hour, i = min, s = sec, a/A = am/AM
+    date_default_timezone_set() sets timezone
+    mktime() creates datetime and returns Unix timestamp
+
+  File Handling
+    readfile() opens file for reading, fopen() opens file in specified mode, or writes if nonexistent -> or die () for errors
+    fread() reads open file up to specified number of bytes -> use filesize() to read entire
+    fgets() reads a single line, then moves file pointer to next line
+    fgetc() read a single character, then moves file pointer to next character
+    feof() checks if EOF reached
+    fwrite() writes to a file
+    fclose() closes an open file
+
+    move_uploaded_file()to upload file to server
+      set file_uploads = On in php.ini and set <form enctype="multipart/form-data">
+      check if file is correct type and existence, then limit size and allowed file extensions
+      
+  Cookies = stored in user's computer
+    check if cookies are enabled by setting a test cookie, then check _COOKIE superglobal if 0
+    setcookie() must be set before <html>; setrawcookie() prevents automatic URLencoding
+      modify by calling again, delete by setting expiry in past
+    isset() checks if cookie is set, then retrieve cookie using _COOKIE[name] superglobal, 
+  Session = set until browser is closed
+    session_start() starts session, must be set before <html> on every page
+      _SESSION["var"] = val; to set/overwrite session variables
+    session_unset() removes all session variables
+    session_destroy() destroys session
+
+  Filters validate and sanitize external input (user, cookies, web service, server vars, DB query results)
+    filter_list() shows all filters available
+    filter_var() does both for a single var, needing var and check type, but can include flags
+      use === to validate integers and floats
+
+  JSON uses json_encode() and json_decode() to PHP object or assc array
+  Callback Functions can be passed, and Anonymous Functions can be set (*7+)
+  Exceptions use throw new Exception() or try {code} catch(Exception var) {code for errors} finally {code to always run}
+
+OOP (*5+) --------------------------------------------------------------------------------------------------------
+  abstraction   = hide implementation inside prototype or function
+  encapsulation = remove access to code via privatization, objects handle own state
+  inheritance   = acquire proprties and methods of another
+  polymorphism  = change acquired things in self only (classes use same interface)
+
+  class className {}
+    create objects with $obj = new className()
+    public = accessed anywhere, protected = within class and inheritants, private = only within class
+    $this refers to current object it is inside, instanceof checks if belongs to a class
+    __construct() to automatically create, __destruct() to automatically destroy at the end of script
+    extends allows class inheritance and inheritance overrides
+    final prevents class inheritance and inheritance overrides
+    const prevents modification of data, usually named all uppercase
+      accessed by self::CONST
+
+    abstract sets classes and methods to allow parent's named method's tasks to be filled out by child classes
+      child method must have same name and same/less restricted access mods with same argument types and number
+    interface is like abstract, but can't have properties, must be public, all abstract methods with no body
+      class name implements interfaceName to inherit, only one
+    trait allows inheritance of multiple methods that can be abstract and public, protected, or private with bodies
+      use traitName set inside class to inherit, multiple
+    static properties and methods can be called without a class instance by using className::porm
+      self::porm to use inside class
+      className::porm to use in other classes, set with public
+      parent::porm to use in child class, set with public or protected
+    namespace are qualifiers that organize constants, functions, and classes into groups better and allow class name reuse
+      declares file as part of a namespace, must be declared before everything else in php file
+      can be nested with name1\name2
+      in namespace, classes can be instantiated without qualifiers
+        outside namespace, use $var = new namespace\class()
+        declare namespace namespaceName in block to not need name\qualifier
+      use namespace as alias to give an alias, can also use with namespace\part
+    iterable is value that can be looped with foreach, can be used as function arg and return data type (*7.1+)
+      array, objects implementing Iterator interface
+
+MySQL -------------------------------------------------------------------------------------------------------
+  distributed by Oracle Corporation, named after co-founder Monty Widenius's daughter
+  PHP + MySQL system is cross-platform (develop in windows, serve on Unix platform), can scale down to embedded DB applications
+  data stored in tables using SQL
+
+  $conn = new mysqli($servername, $username, $password); creates connection
+    mysqli_connect($servername, $username, $password); for procedural programming
+    $conn = new PDO("mysql:host=$servername;dbname=myDB", $username, $password); $conn->setAttribute(PDO::ATTR_ERRMODE,  
+     PDO::ERRMODE_EXCEPTION); for PDO (php Data Obj)
+  if ($conn->connect_error) die(msg); checks connection
+    (*5.3-) use if (mysqli_connect_error()) instead
+    if (!$conn) die(mysqli_connect_error()); for procedural programming
+    catch(PDOException $e) {$e->getMessage();} for PDO, catches all errors
+  $conn->close(); closes connection
+    mysqli_close($conn); for procedural
+    $conn = null; for PDO
+
+  if ($conn->query($sql) === TRUE) to run queries
+    if (mysqli_query($conn, $sql)) for procedural
+    $conn->exec($sql) for PDO
+  nested $last_id = $conn->insert_id; gets last inserted id
+    $last_id = mysqli_insert_id($conn); for procedural
+    $last_id = $conn->lastInsertId(); for PDO
+  if ($conn->multi_query($sql) === TRUE) to insert multiple queries, where sql is concatentated with .= per queryif      
+    (mysqli_multi_query($conn, $sql)) for procedural
+    $conn->beginTransaction(); $conn->exec(query); ... $conn->commit(); for PDO
+      in catch, $conn->rollback(); to rollback failed transaction
+
+  if ($result->num_rows > 0) to check if SELECT successful
+    if (mysqli_num_rows($result) > 0) for procedural
+  while($row = $result->fetch_assoc()) to loop through SELECT data
+    $row = mysqli_fetch_assoc($result) for procedural
+     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); for PDO
+  check if true for DELETE and UPDATE data, except for PDO
+
+  Prepared statement reduce parsing time and guard against SQL injections since different protocol used for param vals
+    Bound parameters minimize bandwidth to server, since only need to send param vals
+
+    Prepare statement template, label parameters with ?
+      $stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
+      $stmt->bind_param("sss", $firstname, $lastname, $email);
+        s = string, i = integer, d = double, b = BLOB (binary large obj)
+      { $stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
+      $stmt->bindParam(':firstname', $firstname); ... } for PDO
+    DB parses, compiles, and optimizes prepared query, then stores without executing
+    App binds values to params, then DB executes statements
+      $stmt->execute();
+    Close prepared statement with $stmt->close();
+
+XML -------------------------------------------------------------------------------------------------------
+  structure data for sharing across websites (ex. RSS feeds)
+
+  Tree-based parsers hold entire doc in memory and transform to tree struct, good for small 
+    ex. SimpleXML, DOM
+  Event-based parsers read in one node at a time to interact with in real time, throwing out old one on move
+    consumes less memory and parses faster, better for large XML
+    ex. XMLReader, XML Expat Parser
+
+  SimpleXML provides easy access to element name, attribute, and text
+    turns XML into iterable data struct, thus needing less lines of code
+    php extension, but part of core in (*5+)
+
+    simplexml_load_string() reads XML from string
+      if ($xml === false) foreach(libxml_get_errors() as $e) $e->message; for error handling
+    simplexml_load_file(fileName) gets node values from XML
+      $xml->node to get node value, specify with []
+      $xml->node['attr'] to get node attribute
+
+  XML DOM Parser is part of php core
+    reads tree structure = Lv1. XML Doc -> Lv2. Root elem -> Lv.3 Text elem
+    $xmlDoc = new DOMDocument(); initializes parser
+    $xmlDoc->load("note.xml"); loads XML
+      $x = $xmlDoc->documentElement; foreach ($x->childNodes AS $item) to loop through document
+        outputs include #text since it separates nodes with whitespace
+    $xmlDoc->saveXML(); processes XML
+
+  XML Expat Parser is part of php core
+    reads in 3 events = Start element -> Start CDATA section, value -> Close element
+    $parser=xml_parser_create(); initializes parser
+    xml_set_element_handler($parser,"start","stop"); sets element handler
+    xml_set_character_data_handler($parser,"char"); sets data handler
+    $fp=fopen("note.xml","r"); opens XML file
+    while ($data=fread($fp,4096)) {
+      xml_parse($parser,$data,feof($fp)) or die (sprintf("XML Error: %s at line %d",
+      xml_error_string(xml_get_error_code($parser)),
+      xml_get_current_line_number($parser))); } to read
+    xml_parser_free($parser); frees XML parser
+
+AJAX (Async JS and XML) -------------------------------------------------------------------------------------------------------
+  techique to create fast and dynamic web pages
+  allows asnyc updates by exchanging small amounts of data with server, preventing whole page reloads
+
+  Browser event creates XMLHttpRequest object, then sends HttpRequest
+    var xmlhttp = new XMLHttpRequest(); 
+    xmlhttp.open("GET", "gethint.php?q=" + str, true); xmlhttp.send();
+  Server process HTTPRequest, creates response to send back to browser
+  Browser process data with JS with callback func, update page content 
+    xmlhttp.onreadystatechange = function() if (this.readyState == 4 && this.status == 200) code;

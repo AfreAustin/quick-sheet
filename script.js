@@ -33,7 +33,7 @@ let temp2 = {
   term: "Command",
   definition: "Command Description"
 };
-const refTerms = [temp, temp2];
+const refTerms = [temp, temp2, , temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2];
 
 // populate directory with reference's terms (ES6+)
 let directory = document.getElementById("directory");

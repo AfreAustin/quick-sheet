@@ -1,0 +1,20 @@
+datatypes: String, int, double, bool, list, map, dynamic = unsure of type to declare
+  const (compile-time) vs final (runtime), ? for nullable
+string: use '$v' or "{$v}" to show vars
+var conversion:
+  int.parse(s) string to int, double.parse(s) string to double, var.toString() to string
+  if nullable, use v ?? default
+list: declare var name = []
+  .add(item) to add one, .addAll([...]) to add multiple, .insert(pos, item) at specific position, .insertAll(pos, []) for multiple
+  .remove(item) to delete one, .removeAt(position)
+map: declare var name = {}
+  use name.values to print just values, name.keys for just keys
+  use [key] = value to add item, .addAll({...}) to add multiple, .remove(key) to remove, .clear() to remove everything
+loop: for (declare; condition; iterate), for (item in collection), while(condition), do(code) while(condition)
+logic: if... else if... else
+functions: name(params) {code}, [param] for optional, {param} for named, :value for default
+input: import 'dart:io' --> stdin.readLineSync();
+class: constructor not required
+  constructor = className(params) {initializers}
+
+cascade notation (..) = obj.method()..method() = {var = obj.method.; var.method }

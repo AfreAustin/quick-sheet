@@ -1,0 +1,213 @@
+https://stackoverflow.com/questions/124549/what-exactly-are-dll-files-and-how-do-they-work
+
+Active Server Pages separated into Classic, Web Forms, MVC, Web Pages, API, and Core
+ASP/ASP.NET is a development framework for web pages, a server-side technology written in C#, currently at 4.6
+  SPA application model, similar to PHP or VBA .NET
+
+------------------------------------------------------------------------------------------------------------
+Razor Markup used to embed C#/VBA server code (server-side rendering)
+  runs Razor code, then sends rendered HTML to client
+
+  for C#, enclosed in @... for inline expressions (vars/functions), or @{...} for general
+    uses code;, "" for strings, case-sensitive, and uses .cshtml
+    prepend _ to files to make user-unbrowsable
+      _AppStart.cshtml file to hide sensitive information
+  dataTypes: var, int, float, decimal, bool, string
+  objects: Array type[]
+  operators: arithmetic, conditional, logical, concatenation +, (), [], ., 
+  loops: for(iter; cond; act), foreach (item in collection), while(cond)
+  logic: if (cond) else if (cond) else, switch (var) { case val: ... default: ... }
+
+  for VB, enclosed in @... inline expressions (vars/functions), or @Code ... End Code for general
+    "" for strings, case-insentitive, and uses .vbhtml
+  dataTypes: dim, integer, double, decimal, boolean, string
+  objects: Array type()
+  operators: arithmetic, conditional, logical words, concatenation &, (), ., 
+  loops: For i=base to target ... Next i, For Each item In collection ... Next item, Do While cond ... Loop
+  logic: If cond Then ... ElseIf cond then ... Else ... Enf If, Select Case var Case val ... Case Else ... End Select
+
+------------------------------------------------------------------------------------------------------------
+ASP WebPages:
+  @RenderPage() to import reusable content blocks in separate files (headers, footers, etc.) in HTML
+  @RenderBody() to import layout page (no content) in own file, @{Layout="...";} in HTML
+
+  Logical Folder Structure
+    Account = logon and security files, App_Data = databases and data files
+    Images, Scripts, and Shared = common files (layout/style files, etc.)
+  ~ operator specify virtual root of program
+  Server.MapPath(...) converts physical path to server-read for accessing data files on server
+  @Href(...) converts code path to browser-read for resources (image, CSS, etc.)
+
+  _AppStart as site root sets startup code before site starts, ran before everytime page first requested
+  _PageStart runs before any page in folder, usually for layout page or checking user is logged in
+    RunPage() runs implicitly even if not declared before requested page, else runs where specified
+
+  Form input uses the name attribute of <input> or similar tags
+    Request["..."] Object to get form input, used with @varName
+    IsPost Object to check if HTTP method is POST request
+  Page Object 
+    Page prop provides access to data shared between pages and layout
+      add any property as needed
+
+  Flat files store data in text files (.txt, .xml, .csv)
+    use Array userData = File.ReadAllLines(fileName) ->
+      @foreach (string dataLine in userData) {
+  	foreach (string dataItem in dataLine.Split(','))
+        {@dataItem <text>&nbsp;</text>}
+        <br />
+      }
+  Database data uses Database object
+    use var db = Database.Open(databaseName); ... var selectQueryString = ... ->
+      @foreach(var row in db.Query(selectQueryString)) {...}
+    searches in App_Data folder; if none, looks for connection string in Web.config file
+  
+  Helpers are components accesssed by single-line Razor code
+    WebGrid - simplifies data display
+      automatically sets up HTML table, options for formatting, paging, and sorting with column headings
+      add var data = db.Query(selectQueryString); var grid = new WebGrid(data); -> @grid.GetHtml()
+      .Pager for pagination
+    Chart - display chart images with formatting options and labels using Chart(...)
+      Array = .AddSeries(chartType..., xValue: new[] {...}, yValues: new[] {...}).Write();
+      Database = .DataBindTable(dataSource: db.Query, xField: "...").Write(); *can use like Array to specify type and data explicitly
+      XML File = check https://www.w3schools.com/asp/webpages_chart.asp
+
+    WebMail - provides functions for SMTP
+      @{
+	WebSecurity.InitializeDatabaseConnection("Users", "UserProfile", "UserId", "Email", true);
+	WebMail.SmtpServer = "smtp.example.com";
+	WebMail.SmtpPort = 25;
+	WebMail.EnableSsl = false;
+	WebMail.UserName = "support@example.com";
+	WebMail.Password = "password-goes-here";
+	WebMail.From = "john@example.com";
+      } in _AppStart.cshtml
+      use with <form method="post" action="EmailSend.cshtml"> --> in EmailSend
+      @{ 
+	var customerEmail = Request["customerEmail"]; var customerRequest = Request["customerRequest"];
+	try { WebMail.Send(to:"someone@example.com", subject: "Help request from - " + customerEmail, body: customerRequest ); }
+	catch (Exception ex ) { <text>@ex</text> }
+      } 
+      .Send optional parameters = from, cc, filesToAttach, isBodyHtml, additionalHeaders
+    WebSecurity - provides security and authentication (reference - https://www.w3schools.com/asp/webpages_security.asp)
+      @{
+	// db file, db table, db column primary key, db usernames column, auto-create db tables?
+	WebSecurity.InitializeDatabaseConnection("Users", "UserProfile", "UserId", "Email", true);
+      } in _AppStart.cshtml
+      *if error, add to Web.config: <appSettings> <add key="enableSimpleMembership" value="true" /> </appSettings>
+    WebImage - image management functionality
+      flip, rotate, resize, watermark
+    Third-Party - 
+      Json, Crypto, FileUpload, ModelState, ObjectInfo, Recaptcha, Gravatar, ServerInfo, Video, WebCache, WebImage
+      LinkShare, Analytics (Google), Bing, Facebook, GamerCard, Twitter
+
+  Publishing steps:
+    Use latest ASP.NET version on server
+    Copy web folders from dev comp to app folder in server (without data)
+      test data prolly not needed in server, but if must copy .sdf, copy empty file from dev
+    Ensure server bin folder contains same .dll files in dev
+
+------------------------------------------------------------------------------------------------------------
+ASP Classic:
+  
+
+------------------------------------------------------------------------------------------------------------
+ADO (ActiveX Data Objects): access databases from web pages, uses .asp extension
+  Steps:
+    1. Create ADO connection to DB, Open connection
+      DSN-less = in computer, can be used against any MS Access database
+	<%
+	set conn=Server.CreateObject("ADODB.Connection")
+	conn.Provider="Microsoft.Jet.OLEDB.4.0"		// MS Access DB driver
+	conn.Open "c:/webdata/northwind.mdb"		// physical path
+	%>
+      ODBC = anywhere, has a DSN (Data Source Name) data structure (Open DB Connectivity)
+ 	<%
+	  set conn=Server.CreateObject("ADODB.Connection")
+	  conn.Open "northwind"
+	%>
+	*To open connection: In server, 
+	  Open ODBC in control panel, Choose System DSN, Click Add, Select MS Access Driver, Click Finish
+	  In next screen, click Select to locate DB, Give DB a DSN, Click OK
+
+    2. Create ADO recordset, Open recordset, Extract recordset data
+	<% 
+	  set rs=Server.CreateObject("ADODB.recordset")
+	  rs.Open "Customers", conn			// create ADO Table rs
+	  rs.Open "Select * from Customers", conn	// create ADO SQL rs
+	%>
+	*To extract data: 
+	  for each x in rs.fields
+  	    response.write(x.name)
+  	    response.write(" = ")
+  	    response.write(x.value)
+	  next
+	*To display field names and values:
+	  do until rs.EOF
+  	    for each x in rs.Fields
+    	      Response.Write(x.name)
+    	      Response.Write(" = ")
+    	      Response.Write(x.value & "<br>")
+  	    next
+  	    Response.Write("<br>")
+  	    rs.MoveNext
+	  loop
+	*To display in HTML table:
+	<table border="1" width="100%">
+	  <tr>
+  	    <%for each x in rs.Fields
+    	    response.write("<th>" & x.name & "</th>")
+  	    next%>
+  	  </tr>
+	<%do until rs.EOF%>
+  	  <tr>
+  	  <%for each x in rs.Fields%>
+    	    <td><%Response.Write(x.value)%></td>
+  	  <%next 
+	  rs.MoveNext %>
+  	  </tr>
+	<%loop *close all %>
+	</table>
+
+    3. Close recordset, Close connection
+	respectively, rs.close conn.close
+
+    For Create, Update, and Delete, use conn.Execute sql
+
+------------------------------------------------------------------------------------------------------------
+ADO Objects:
+  Datatypes = depends on the program (Access, SQLServer, Oracle)
+    https://www.w3schools.com/asp/ado_datatypes.asp
+
+  Connection = set conn=Server.CreateObject("ADODB.connection") = create open connection to data source
+    https://www.w3schools.com/asp/ado_ref_connection.asp
+
+  Error = for each err in obj.Errors = details data access errors during single operation
+    https://www.w3schools.com/asp/ado_ref_error.asp
+
+  Recordset = set rs=Server.CreateObject("ADODB.recordset") = set of records from DB
+    supports immediate and batch updating
+    cursors: dynamic (adds, changes, deletes of other users), keyset (changes of other users),
+             static (static data to read or generate reports), forward-only (scroll forward through Recordset)
+    https://www.w3schools.com/asp/ado_ref_recordset.asp
+
+  Record = obj.property OR obj.method = row info in Recordset object, directory, or file
+    https://www.w3schools.com/asp/ado_ref_record.asp 
+  
+  Field = set fild=Server.CreateObject("ADODB.field") = column info in a Recordset object
+    https://www.w3schools.com/asp/ado_ref_field.asp
+
+  Stream = obj.property OR obj.method = read, write, and manage a stream of binary text/data
+         = obtained from URL pointing to doc/folder/Record, instantiating to store app data, open default Stream of Record
+    https://www.w3schools.com/asp/ado_ref_stream.asp
+
+  Command = set comm=Server.CreateObject("ADODB.command") = execute single query against DB to CRUD
+          = if used to Read, returns RecordSet object
+    https://www.w3schools.com/asp/ado_ref_command.asp
+
+  Parameter = obj.property OR obj.method = details single parameter in stored procedure or query
+            = used to create Parameterized Commands = input, output, input/output, 
+    https://www.w3schools.com/asp/ado_ref_parameter.asp
+
+  Property = set prop=Server.CreateObject("ADODB.property") = dynamic characteristic of ADO by provider
+    https://www.w3schools.com/asp/ado_ref_property.asp
+

@@ -1,0 +1,119 @@
+builds: debug = development, profile = performance, release = release
+runApp() makes Widget the root, where Flutter forces to cover screen
+
+Widgets: 
+  main function to build(), temporary object to construct presentation
+  Stateless class store args from parent with final
+    ChangeNotifierProvider() from package:provider/provider.dart keeps state with ChangeNotifier, but used in Stateless
+      context.watch<AppState> set in Stateless tracks changes, changed by notifyListeners() in created State
+  Stateful class creates persistent State object with createState()
+    State needs setState() to rerun build method and make changes
+      subclass named with _State, to indicate private class
+      widget, parent, or both can manage state
+        parent if state is user data, widget if aesthetic
+    change notifs flow up by callbacks, current state flow down to stateless widget
+
+Layout:
+  Basic = Text, Row (flex), Column (flex), Stack (absolute), Container
+  Card often used with ListTile, size constrained by SizedBox, but can't scroll
+  ListTile is row has 3 lines with leading and trailing icons
+  Column, Row can't scroll
+
+Design and Themes:
+  use ThemeData()
+  Material: import 'package:flutter/material.dart'; in pubspec.yaml, set uses-material-design: true
+
+Interactivity:
+  Gesture system = raw pointer events layer describes location and movement, gesture layer describes semantics
+  Pointer = PointerDownEvent, Move, Up, Cancel
+  Gestures = Tap (Down, Up, Tap, Cancel), DoubleTap, LongPress, VerticalDrag/HorizontalDrag/Pan (Start, Update, End)
+  Gesture disambiguation places them in arena where one can drop out or declare self winner
+  LongPressDraggable() Widget for drag-and-drop interaction
+  TextField() and TextFormField() for text input, used with TextEditingController(), which must be disposed
+    handle changes by either adding onChanged to Field or adding Event Listener to Controller
+    add focus by either setting autofocus: true in Field or passing FocusNode() to Field
+    add validation with validator: (value) {} option
+  Forms need a GlobalKey<FormState>() to access form
+  Intent creates a shortcut/action? --LOOK MORE INTO THIS
+  Focus and TabIndex --LOOK MORE INTO THIS
+
+Assets and Media:
+  pubspec.yaml identifies all assets for app
+  launch screen persists when not calling runApp (specifically FlutterView.render() in response to Platform.Dispatcher.onDrawFram)
+  videos use video_player plugin, where Android = ExoPlayer() and iOS = AVPlayer(), none on desktop
+    add dependency with $ flutter pub add video_player, modify Android and iOS permissions
+    use VideoPlayerController
+
+Navigation and Routing:
+  Navigator() displays screens as stack of Route(), use push() and pop() to go forward and back one route
+    use MaterialApp.routes for deep links with named routes (not recommended)
+      URL strategy configurable with usePathUrlStrategy() from import 'package:flutter_web_plugins/url_strategy.dart'
+  for advanced navigation and routing requirements, use routing package like go_router
+  route = screens and pages = Activity (Android) = ViewController (iOS)
+    use MaterialPageRoute or make custom route, or use CupertinoPageRoute()
+    pass data by passing in a builder from push(), return data by using a Future from pop() in await push()
+      when BuildContext from Stateful, mounted property must be checked after async gap
+  TabController() to create custom, or DefaultTabController(); TabBar() and Tab() to create, TabBarView() to display
+  Drawer() in Scaffold() with drawer: param, closed with Navigator.pop(context)
+
+Animation and Transitions:
+  Drawing-based standalone sprites or code-based focused on widgets
+  Implicit uses Animated...() widgets, Explicit uses AnimationController()
+    Implicit uses Animated...() for built-in, TweenAnimationBuilder() for custom, both extend ImplicitlyAnimatedWidget()
+    Explicit if repeats forever, discontinuous, or multiple widgets together, extends AnimatedWidget()
+      ...Transition() for built-in, extend AnimatedWidget() for custom standalone or AnimatedBuilder() for others 
+      If performance problems, use CustomPainter()
+  If working with design team's raster or svg, use framework or package
+
+  Implicit animates existing widgets through interpolation set with duration, curve, and other properties
+    Can be Stateless, use StreamBuilder and FutureBuilder
+  Implicit TweenAnimationBuilder() set with duration, Tween(), and builder
+
+  Ticker() calls function every frame, Controller calls a setState every frame, so up to 120 calls per second
+  Physics based animation, or Tween animation defines beginning and end points, timeline, and curve (speed and timing)
+  Animation<T>() understands current value and state, and can have Listener and StatusListener
+  AnimationController() uses vsync to prevent offscreen animation using resources, usually implemented by SingleTickerProviderStateMixin
+  Tween() inherits from Animatable<T>()
+
+Accesibility and Internationalization:
+  
+
+Data and Backend ----------------------------------------------------------------------------------------------
+
+State Management:
+  UI = f(state) => screen layout = build methods(app state)
+  runs on declarative style, with every state change trigerring a full rebuild
+  state = data needed to rebuild UI; states you managed are either ephemeral or app
+    ephemeral = UI/local state = can neatly contain in one widget, usually uses State and setState()
+    app = shared state = share across parts or persists between session
+    no clear-cut rule between the two kinds of state
+  state must belong to parent or above, as needed to be rebuilt
+  widgets are immutable, so they are replaced when asked to rebuild
+  provider package works with low-level widgets (next 3 default)
+    ChangeNotifier provides change notifs to listeners with notifyListeners()
+    ChangeNotifierProvider() widget provides ChangeNotifier to descendants
+      if providing more than one class, use MultiProvider()
+    Consumer specifies model to access, which uses build context, data passed, and child widget tree if needed
+    use Provider.of with listen: false to access data, but not change UI
+
+Networking and http:
+  package:http/http.dart is default way to cross-platform network (import as http)
+    Android need declare internet use in manifest, macOS must allow network access in .entitlements
+  Future is core to async operations, represents potential value/error
+    http.get returns Future containing Response
+    http.Response contains data from successful http call
+      convert Response to JSON Map with dart:convert as default (could do JSON serialization)
+        use factory constructor in class.fromJson(Map<String, dynamic> json)
+    
+
+
+
+
+
+
+
+
+
+
+
+

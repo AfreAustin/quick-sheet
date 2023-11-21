@@ -1,0 +1,258 @@
+Vue is a JS framework extending HTML attributes with Directives, and binds data to HTML with Expressions
+  template-based syntax, two-way data binding, and centralized state management
+  use either the Options API or Composition API
+
+  add <div id="app"> to give Vue a connection
+  add <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> to include Vue
+  add const app = Vue.createApp({
+    template: `HTML code`,
+    data() { return { key: val } },
+    watch: { ... },
+    emits: [ ... ],
+    computed: { ... },
+    methods: { ... },
+    props: [ prop: {type, default, required, validator}, ... ],
+    expose: [ ... ]
+  }) is Vue instance structure
+  app.mount('#app') to create Vue instance in another script tag
+
+  Text interpolation {{ ... }} can be variables and simple JS expressions
+
+Directives -----------------------------------------------------------------------------------------------
+  v-bind  = connect HTML attr to data var in Vue instance
+    syn. v-bind:[attr]="Vue data, ..." --> shorthand = :[attr]="Vue data"
+    mods: .camel, .prop --> shorthand = .prop, .attr
+    use '+var+' when used in CSS function
+    use [{}] to mix conditioned and unconditioned classes
+    
+  v-if    = create HTML tag based on condition, use with v-else-if, v-else
+    syn. v-if="cond"
+    triggers mounted() and unmounted()
+  v-show  = specify HTML visibility based on condition
+    syn. v-show="cond"
+    does not trigger un/mounted() and de/activated()
+  v-for   = create HTML tags with for-loop
+    syn. v-for="(item, key, index) in dataSource"
+      dataSrc = Array, Object, number, string, Iterable
+    can be in same HTML tag, or separated
+  v-on    = connect event on HTML tag to JS expr or Vue method, can include event mods
+    syn. v-on:event="method" --> shorthand = @:event="method"
+    when event occurs, event object passed with method by default -> ($event)
+    mods: .once, .capture, .passive, .prevent, .stop, .self,
+          .[Vue key alias], .[letter], .[mod key], .[left, center, right]
+  v-model = used in HTML forms to create two-way binding between <input> and Vue data, or vue instance prop and component
+    syn. v-model="Vue data"
+    if used on component, must have props and emits set, default propName = modelValue and emitEvent = update:modelValue
+      can use computed prop with get() and set()
+    mods: .lazy, .number, .trim, custom
+  v-slot  = use named slots
+    syn. v-slot:mySlot --> shorthand = #mySlot
+  v-cloak = hide precompiled template until ready
+    syn. v-cloak
+  v-html  = output html code in template
+    syn. v-html="html"
+    vulnerable to XSS attacks
+    html created will not follow <style scoped>, use <style module> instead with :id="$style.id"
+  v-memo  = hold element rendering until change in property/ies for optimization
+    syn. v-memo="[props]"
+    if empty [], same functionality as v-once
+  v-once  = render element only once, also making child elements static after first render
+    syn. v-once
+  v-pre   = skip compiling element and its contents, used to display raw Vue code
+    syn. v-pre
+  v-text  = update element's text, replacing all existing text elements
+    syn. v-text="vueData"
+
+Computed Properties ----------------------------------------------------------------------------------
+  data properties that depend on other properties
+  written like methods, but no input params
+  updated automatically when dependancy changes
+
+Watchers -------------------------------------------------------------------------------
+  method that watch one data property with same name, running everytime data prop changes
+  used when data prop requires action, like validation or manipulation
+
+Template -------------------------------------------------------------------------------
+  HTML part of Vue app, used in .vue files to structure code
+
+  SFCs (Single File Components) use .vue files to structure code
+    has <template>, <script>, and <style> tags only
+    uses Vite to compile .vue to .html, .js, and .css, writing code using Volar extension
+      Vite runs over Node.js
+    Components are PascalCase, either use built-in or custom
+      add with app.component('comp-alias', MyComponent) to main.js for global
+      add with import and in components: {...} in <script> of .vue for local 
+      use with <comp-alias />
+    export default { declarations... } lets main.js catch data with import App so it can be mounted to index.html's <div id="app">
+
+    Props is a config option to pass data to components via custom tag attributes (parent to child)
+      add props: [myProp: {options}, ...], to <script>
+        options = type, required, default, validatorFunc, 
+      to pass with non-string datatypes, use v-bind
+      as props are read-only from parent, initialize a data value in child instead (child to parent)
+      key attribute to circumvent Vue reusing elements for performance, rather than recreating
+    $emit() create custom event in child that parent can capture
+      add with @event-name="func" in parent (App.vue), where func is receiving function
+
+    Fallthrough attributes are attirbutes not declared as props
+      typical attributes = class, style, v-on, etc.
+      v-bind="$attrs" to mark element that receives, if more than one element in component
+
+    <slot> send content from parent to child component's <template>
+      use as <slot-comp>...</slot-comp> in parent, <slot></slot> in child
+      in child, add fallback content
+      use v-slot to use named slots, with <slot name="mySlot"> in child
+        unnamed slot marked default for components with v-slot: default or no v-slot
+        can be used in <template> inside a <slot-comp>
+      use v-bind:myLocal to send local data to parent, received with v-slot:"any", used with any.myLocal
+        pass array from child to parent
+        can pass staticData="...", :dynamicData="", used with any.sordData
+
+    <component>'s is attribute makes component dynamic
+      <component :is="activeComp"></component> ==> computed: activeComp() changes component
+      wrap with <KeepAlive></KeepAlive> to remember user input
+        include and exclude attributes for named components, name: set in comp <script>, in/exclude=""
+        max attribute limits number of components' states to remember to last n components viewed, :max="n"
+
+    <Teleport> moves content to different place in DOM with attribute to="CSS-selector"
+      keeps <script> and <style> from home component
+
+    Template Refs refer to specific DOM elements, replacing getElementBy...() and querySelector()
+      when ref attribute is set on HTML tag, DOM element added to $refs object
+      ref="myRef" in tag, this.$refs.myRef
+
+    <style> stylings are globally available to all components
+      use <style scoped> to limit to component with declaration
+
+    http fetch with const response = await fetch(...), returns Promise when pending, then data on resolve
+      async func() { fetch ... this.data = response }
+    axios library allows Vue to make HTTP requests
+
+  Lifecycle Hooks of Component
+    beforeCreate    = before component is initialized (data, computed, props , etc.)
+      avoid accessing component elems as not yet created
+    created         = after initialization
+      avoid accessing component elems as not yet mounted
+    beforeMount     = before added to DOM
+      avoid accessing DOM elems as not yet accessible
+    mounted         = right after added to DOM
+      can now access DOM elements
+    beforeUpdate    = component data changed, but not yet rendered to screen
+      allows changes without triggering update
+    updated         = component updated its DOM tree
+      avoid modifying page itself, as can cause infinite loop
+    beforeUnmount   = before component removed from DOM
+      can still access DOM elements
+    unmounted       = component removed from DOM
+      useful for removing listeners, timers, intervals
+    errorCaptured   = error occurs in descendant component
+      useful for error handling, logging, displaying
+      args: error, compInst, errorInfo
+
+    renderTracked   = render function set to track reactive component (react comp initialized)
+    renderTriggered = reactive component changes, needing screen update
+      both renders only available in dev mode for debugging
+    activated       = cached dynamic component is added, but not from DOM
+    deactivated     = cached dynamic component is removed, but not from DOM
+    serverPrefetch  = only called during SSR (server-side rendering)
+      used with async... await
+
+  Provide provides data from one component to another, Inject gets provided data
+    alternative to passing data via props, usually for large projects
+    to Provide, in parent <script>, add provide() {return data:myProvide} to export default {}
+    to Inject, in child <script>, add inject: ['myProvide']
+
+  Routing is client-side with no full-page reload using vue-router library
+    use with app.use(router), router=createRouter({history, routes ...	})
+    <router-view></router-view> for display
+    <router-link to="link">...</router-link> to define link, rendered <a>
+      class="router-link-active" on active route
+
+  Form Inputs -> use @submit.prevent in <form> to prevent browser refresh on submit
+    type="radio" needs value attribute explicitly set
+    read only inputs, like type="file", use @change instead of v-model
+
+  <Transition> allows animations on v-if or v-show with one element at root level
+    for additions, v-enter-from > v-enter-active > v-enter-to
+      JS Hook = before-enter > enter > after-enter, enter-cancelled
+    for removals, v-leave-from > v-leave-active > v-leave-to
+      JS Hook = before-leave > leave > after-leave, leave-cancelled (v-show only)
+    for named transitions, replace v- with name-
+    for appear prop, element animated when page loads
+    for mode prop, out-in = element removal finished before adding new elem
+    plain CSS = :class="{ animation: true }"
+  <TransitionGroup> wrap around elements made with v-for
+    must define :tag="" to render as HTML
+    created tags must use :key="x", where x is used in {{}}
+    v-move class to animate other items not removed
+      set position: absolute in v-leave-active to give something to animate
+
+Build -----------------------------------------------------------------------------------------------
+  compiles Vue project into html, js, and css files optimized to run directly on browser
+    saved in "dist" folder
+  npm run build => build project; npm run preview => view built project
+
+Composition API -------------------------------------------------------------------------------------
+  logic written with imported Vue functions
+  <script setup> allows direct use of vars and funcs in <template> == easier to use Composition
+  functions like ref and computed muse be imported
+    ref(val) declares reactive content with initial value (in Options, no need to explicitly declare)
+    computed(code) switches between computed values
+
+Built-in Elements -----------------------------------------------------------------------------------
+  Attributes
+    is  = current active dynamic component
+      set in <component> with v-bind to connect computed value "activeComp"
+      set in <HTML tags> with v-bind to replace native HTML with Vue/custom component using "vue:my-comp"
+        custom not a Vue feature
+    key = give unique value to v-for elements
+    ref = marks element for later script manipulation in $refs object
+
+  Components
+    <KeepAlive>  = keep state of non-active dynamic components by caching
+      props: none, include, exclude, max
+      lifecycle: activated(), deactivated()
+    <Teleport>   = append element elsewhere in DOM structure
+      props: to, disabled
+    <Transition> = Animate element
+      props: appear, mode, name, css, type, duration, [transitionClass]Class
+    <TransitionGroup> = Animate elements created through v-for
+      props: [tag], [moveClass]
+    <Suspense>   = used with async components to render content of fallback slot while waiting
+      experimental, not globally supported
+
+  Elements
+    <component> = dynamic component
+      props: is
+      v-model does not work on native HTML form input tags created with this
+    <slot>      = slot where child can get content from parent
+      props: [data], name
+    <template>  = placeholder for content without being rendered (as DOM element)
+      if used with v-if..., v-for, or v-slot
+        top-level <template> is required, cannot use these directives
+
+  Component Instance Object
+    $attrs  = fallthrough attributes and listeners set on component's tag
+      (READ ONLY)
+    $data   = props stored in data of Vue instance
+    $el     = root DOM node of Vue component's <template>
+      only works if there is only one root element
+      not recommended, use $refs instead
+    $parent = Vue instance of parent component
+      if parent is used in root component, value is null
+    $props  = props declared in receiving component
+      (READ ONLY)
+    $refs   = elements marked with ref attribute
+      use as this.$refs
+    $root   = Vue instance of root component of total Vue app (App.vue usually)
+    $slots  = slots provided by parent
+
+  Component Instance Method
+    $emit() = trigger custom event to communicate to parent comp
+      args: eventName, otherArgs
+    $forceUpdate() = force re-render of Vue app
+      args: callbackFunc
+    $nextTick() = wait for next DOM update cycle of current Vue comp to finish before executing
+    $watch() = create watcher, returns stop function to use for watcher
+      args: source, callback, optionsObj(deep, immediate, flush, onTrigger/Track)
+

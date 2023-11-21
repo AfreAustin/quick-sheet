@@ -1,0 +1,1 @@
+XML = extensible markup language
