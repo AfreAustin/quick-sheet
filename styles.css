@@ -24,9 +24,9 @@ body { margin: 0; }
 }
 
 .side-nav {
+  position: relative;
   overflow: scroll;
   background-color: var(--main-color);
-  padding: 10px;
   width: 25%;
   color: var(--secondary);
 }
@@ -45,7 +45,8 @@ body { margin: 0; }
 }
 
 /* Side Navigation items */
-.ref-nav h4 { margin: 0; }
+.ref-nav { padding: 10px; }
+.ref-nav h2 { margin: 0; }
 .ref-nav ul {
   padding: 0;
   list-style-type: none;
@@ -60,10 +61,60 @@ body { margin: 0; }
   color: var(--main-color);
 }
 
-/* reference items */
-.reference {
-  padding: 0;
+.nav-menu {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background-color: var(--main-color);
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  padding: 10px;
+  list-style: none;
 }
+#toggle-nav { margin-bottom: 10px; }
+#directory-search {
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: 100%;
+  color: var(--main-color);
+  accent-color: var(--main-color);
+}
+
+.directory {
+  display: none;
+  padding: 10px;
+}
+.category-title {
+  margin: 0;
+  width: max-content;
+}
+.category .term-bubble {
+  background-color: var(--tertiary);
+  margin: 10px 0;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.category .term-bubble:hover {
+  opacity: 80%;
+}
+.category .term {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.category .def {
+  overflow: hidden;
+  margin-left: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* reference items */
+.reference { padding: 0; }
 
 .reference-menu {
   display: flex;
@@ -90,69 +141,10 @@ body { margin: 0; }
   filter: grayscale(100%); 
   cursor: not-allowed;
 }
-#directory-search {
-  background-color: var(--secondary);
-  border: 1px solid var(--secondary);
-  border-radius: 10px;
-  padding: 0 10px;
-  width: 30vw;
-  color: var(--main-color);
-  accent-color: var(--main-color);
-}
 
 .reference-header { text-align: center; }
 #ref-mod { font-style: italic; }
 #ref-info { padding: 0 10px; }
-
-/* directory items */
-.toolbar {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    padding: 10px;
-}
-.toolbar > button {
-    background-color: var(--tertiary);
-    border-color: var(--secondary);
-    border-radius: 10px;
-    padding: 5px;
-    color: var(--secondary)
-}
-.category {
-    margin-bottom: 10px;
-    border-top: 1px dashed var(--secondary);
-}
-.category .category-title {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--main-color);
-    margin: 0;
-    border-bottom-right-radius: 10px;
-    padding: 1px 10px 5px 10px;
-    width: max-content;
-}
-.category .term-bubble {
-    background-color: var(--tertiary);
-    margin: 10px 0;
-    border-radius: 10px;
-    padding: 5px;
-    text-align: center;
-    cursor: pointer;
-}
-.category .term-bubble:hover {
-    opacity: 80%;
-}
-.category .term {
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-.category .def {
-    overflow: hidden;
-    margin-left: 0px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
 
 /* form dialog box items */
 .form-dialog {

@@ -1,15 +1,48 @@
+const refNav = document.getElementById("ref-nav");
+const navMenu = document.getElementById("nav-menu");
+const directory = document.getElementById("directory");
 
-// adds onclick event to all <li> elements in side navigation
-// click event swaps reference sheets
-const listItems = document.querySelectorAll("#side-nav li");
-for (let i = 0; i < listItems.length; i++) {
-  listItems.item(i).addEventListener("click", function(){
-    let title = listItems.item(i).innerText.trim().split(" ");
+/*
+*  Change reference directory based on navigation
+*  Hide reference list and show directory list
+*  Show button that switches back to reference list
+*/
+const navItems = document.querySelectorAll("#ref-nav li");
+for (let i = 0; i < navItems.length; i++) {
+  navItems.item(i).addEventListener("click", () => {
+    refNav.style.display = "none";
+    navMenu.style.display = "block";
+    directory.style.display = "block";
+
+    let title = navItems.item(i).innerText.trim().split(" ");
     let sheet = title[0];
 
-    document.getElementById("dir-search").placeholder = "Search " + sheet;
+    document.getElementById("directory-search").placeholder = "Search " + sheet;
   }, false);
 }
+
+const toggleNav = document.getElementById("toggle-nav");
+toggleNav.addEventListener("click", () => {
+  refNav.style.display = "block";
+  navMenu.style.display = "none";
+  directory.style.display = "none";
+}, false);
+
+/*
+*  filter reference directory by search value
+*/
+const dirSearch = document.getElementById("directory-search");
+dirSearch.addEventListener("input", () => {
+  let search = dirSearch.value;
+  let terms = directory.getElementsByClassName("term");
+  // let titles = directory.getElementsByClassName("category-title"); // TODO: Hide title if no bubbles shown?
+
+  for (let i = 0; i < terms.length; i++) {
+    let found = terms.item(i).innerText.toUpperCase().match(search.toUpperCase());
+    if (found) terms.item(i).parentElement.style.display = "block";
+    else terms.item(i).parentElement.style.display = "none";
+  }
+}, false);
 
 /*
 // convert terms from JSON to objects
@@ -82,20 +115,6 @@ for (let i = 0; i < listTerms.length; i++) {
     document.getElementById("ref-link").style.display = "inline";
     document.getElementById("edit-button").removeAttribute("disabled");
   }, false);
-}
-
-// filter reference directory to show what is searched
-function filterDirectory() {
-  let search = document.getElementById("dir-search").value;
-  let directory = document.getElementById("directory");
-  let terms = directory.getElementsByClassName("term");
-  // let titles = directory.getElementsByClassName("category-title"); // TODO: Hide title if no bubbles shown?
-
-  for (let i = 0; i < terms.length; i++) {
-    let found = terms.item(i).innerText.toUpperCase().match(search.toUpperCase());
-    if (found) terms.item(i).parentElement.style.display = "block";
-    else terms.item(i).parentElement.style.display = "none";
-  }
 }
 
 // toggle dialog box

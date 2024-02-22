@@ -7,7 +7,7 @@
 
   <!-- <base href="https://www.quicksheet.com/" target="_blank"/> -->
   <link href="styles.css" type="text/css" rel="stylesheet" />
-  <script src="scripts.js"></script>
+  <script src="scripts.js" defer="defer"></script>
 </head>
 <body>
   <header class="site-header">
@@ -16,10 +16,23 @@
   </header>
 
   <main class="site-content">  
-    <aside id="side-nav" class="side-nav">
+    <aside class="side-nav">
+      <menu id="nav-menu" class="nav-menu">
+        <li>
+          <button id="toggle-nav" class="menu-button" title="Back" 
+            type="button"> ▤ Show Reference Sheets
+          </button>           
+        </li>
+        <li>
+          <search>
+            <input id="directory-search" type="search" placeholder="Search" />
+          </search>
+        </li>
+      </menu>
+
       <nav id="ref-nav" class="ref-nav">
         <ul>
-          <h4>Markup Languages</h4>
+          <h2>Markup Languages</h2>
           <li>HTML</li>
           <li>XML</li>
           <li>XHTML</li>
@@ -28,7 +41,7 @@
           <li>Razor</li>
         </ul>
         <ul>
-          <h4>UI/UX Web Design</h4>
+          <h2>UI/UX Web Design</h2>
           <li>CSS</li>
           <li>SASS</li>
           <li>SCSS</li>
@@ -37,21 +50,21 @@
           <li>Tailwind</li>
         </ul>
         <ul>
-          <h4>Scripting Languages</h4>
+          <h2>Scripting Languages</h2>
           <li>JavaScript</li>
           <li>TypeScript</li>
           <li>JSX</li>
           <li>Dart</li>
         </ul>
         <ul>
-          <h4>Frontend Frameworks</h4>
+          <h2>Frontend Frameworks</h2>
           <li>React</li>
           <li>Angular</li>
           <li>Vue.js</li>
           <li>Flutter</li>
         </ul>
         <ul>
-          <h4>Backend Web Technologies</h4>
+          <h2>Backend Web Technologies</h2>
           <li>PHP</li>
           <li>ASP.NET</li>
           <li>Express</li>
@@ -59,26 +72,26 @@
           <li>AWS</li>
         </ul>
         <ul>
-          <h4>Database Management</h4>
+          <h2>Database Management</h2>
           <li>SQL</li>
           <li>MySQL</li>
           <li>PostgresSQL</li>
           <li>MongoDB</li>
         </ul>
         <ul>
-          <h4>General Programming Languages</h4>
+          <h2>General Programming</h2>
           <li>C++</li>
           <li>C#</li>
           <li>Python</li>
           <li>Java</li>
         </ul>
         <ul>
-          <h4>Legacy Programming Languages</h4>
+          <h2>Legacy Programming</h2>
           <li>C</li>
           <li>COBOL</li>
         </ul>
         <ul>
-          <h4>Hardware Programming</h4>
+          <h2>Hardware Programming</h2>
           <li>Arduino</li>
           <li>Verilog</li>
           <li>Assembly</li>
@@ -89,6 +102,17 @@
       </nav>
 
       <dl id="directory" class="directory">
+        <div class="category">
+          <h3 class="category-title">Information</h3>
+          <div class="term-bubble" title="Syntax">
+            <dt class="term">Standard</dt>
+            <dd class="def">Syntax and Rules</dd>
+          </div>
+          <div class="term-bubble" title="Notes">
+            <dt class="term">Notes</dt>
+            <dd class="def">Personal Notes</dd>
+          </div>
+        </div>
       </dl>
     </aside>
 
@@ -101,11 +125,6 @@
           <button id="edit-button" class="menu-button" title="Edit" 
             type="button" disabled="disabled"> ✎ Edit Article
           </button> 
-        </li>
-        <li class="menu-item">
-          <search>
-            <input id="directory-search" type="search" placeholder="Search HTML" oninput="filterDirectory()" />
-          </search>      
         </li>
         <li class="menu-item">
           <a id="ref-src" class="menu-button" href="#" title="View Source">🛈 Source</a>
@@ -121,21 +140,6 @@
       <section id="ref-info">Information</section>
     </article>
 
-    <!--
-    <dl class="directory" id="directory">
-      <section class="category">
-        <h3 class="category-title">Information</h3>
-        <div class="term-bubble" title="Syntax">
-          <dt class="term">Standard</dt>
-          <dd class="def">Syntax and Rules</dd>
-        </div>
-        <div class="term-bubble" title="Notes">
-          <dt class="term">Notes</dt>
-          <dd class="def">Personal Notes</dd>
-        </div>
-      </section>
-    </dl>
-  -->
     <noscript>
       JavaScript not supported :/ Download the print reference instead...
     </noscript>
