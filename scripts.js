@@ -29,19 +29,52 @@ toggleNav.addEventListener("click", () => {
 }, false);
 
 /*
-*  filter reference directory by search value
+*  Filter reference directory by search value
 */
 const dirSearch = document.getElementById("directory-search");
 dirSearch.addEventListener("input", () => {
-  let search = dirSearch.value;
   let terms = directory.getElementsByClassName("term");
-  // let titles = directory.getElementsByClassName("category-title"); // TODO: Hide title if no bubbles shown?
+  let search = dirSearch.value;
 
   for (let i = 0; i < terms.length; i++) {
     let found = terms.item(i).innerText.toUpperCase().match(search.toUpperCase());
     if (found) terms.item(i).parentElement.style.display = "block";
     else terms.item(i).parentElement.style.display = "none";
   }
+}, false);
+
+// ------------------------------------------------------------------------------------------------------------------------
+const formDialog = document.getElementById("form-dialog");
+const formTitle = document.getElementById("form-title");
+
+// toggle dialog box
+function toggleDialog() {
+  if (formDialog.open) formDialog.close();
+  else formDialog.showModal();
+}
+
+// close form
+const closeForm = document.getElementById("close-form");
+closeForm.addEventListener("click", () => toggleDialog(), false);
+
+// add new item to a reference sheet
+const addItem = document.getElementById("add-button");
+addItem.addEventListener("click", () => {
+  toggleDialog();
+  formTitle.innerText = "Adding New Term";
+  
+  console.log("TO BE IMPLEMENTED");
+}, false);
+
+// edit existing item
+const editItem = document.getElementById("edit-button");
+editItem.addEventListener("click", () => {
+  let term = document.getElementById("ref-title");
+
+  toggleDialog();
+  formTitle.innerText = "Editing " + term.innerText;
+
+  console.log("TO BE IMPLEMENTED");
 }, false);
 
 /*
@@ -115,33 +148,5 @@ for (let i = 0; i < listTerms.length; i++) {
     document.getElementById("ref-link").style.display = "inline";
     document.getElementById("edit-button").removeAttribute("disabled");
   }, false);
-}
-
-// toggle dialog box
-function toggleDialog() {
-  const formDialog = document.getElementById("form-dialog");
-
-  if (formDialog.open) formDialog.close();
-  else formDialog.showModal();
-}
-
-// add new item to a reference sheet
-function newItem() {
-  const formTitle = document.getElementById("form-title");
-
-  toggleDialog();
-  formTitle.innerText = "Adding New Term";
-  
-  console.log("TO BE IMPLEMENTED");
-}
-
-// edit existing item
-function editItem() {
-  const formTitle = document.getElementById("form-title");
-  let term = document.getElementById("ref-title");
-  formTitle.innerText = "Editing " + term.innerText;
-
-  toggleDialog();
-  console.log("TO BE IMPLEMENTED");
 }
 */
