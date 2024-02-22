@@ -1,3 +1,4 @@
+
 // adds onclick event to all <li> elements in side navigation
 // click event swaps reference sheets
 const listItems = document.querySelectorAll("#side-nav li");
@@ -10,18 +11,7 @@ for (let i = 0; i < listItems.length; i++) {
   }, false);
 }
 
-// only allow one open <details> tag
-let nav = document.getElementById('nav-content');
-nav.addEventListener('toggle', function (event) {
-  if (!event.target.open) return;
-
-  let dropdowns = nav.querySelectorAll('.nav-item[open]');
-  Array.prototype.forEach.call(dropdowns, function (dropdown) {
-    if (dropdown === event.target) return;
-    dropdown.removeAttribute('open');
-  });
-}, true);
-
+/*
 // convert terms from JSON to objects
 let temp = {
   category: "New Section",
@@ -135,3 +125,4 @@ function editItem() {
   toggleDialog();
   console.log("TO BE IMPLEMENTED");
 }
+*/
