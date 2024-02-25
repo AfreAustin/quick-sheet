@@ -2,10 +2,18 @@ const refNav = document.getElementById("ref-nav");
 const navMenu = document.getElementById("nav-menu");
 const directory = document.getElementById("directory");
 
+// Switches navigation from directory to reference list
+const toggleNav = document.getElementById("toggle-nav");
+toggleNav.addEventListener("click", () => {
+  refNav.style.display = "block";
+  navMenu.style.display = "none";
+  directory.style.display = "none";
+}, false);
+
 /*
 *  Change reference directory based on navigation
-*  Hide reference list and show directory list
-*  Show button that switches back to reference list
+*  Hide reference list and show directory list with navigation menu
+*  Indicate selected reference in search bar 
 */
 const navItems = document.querySelectorAll("#ref-nav li");
 for (let i = 0; i < navItems.length; i++) {
@@ -15,18 +23,34 @@ for (let i = 0; i < navItems.length; i++) {
     directory.style.display = "block";
 
     let title = navItems.item(i).innerText.trim().split(" ");
-    let sheet = title[0];
+    document.getElementById("directory-search").placeholder = "Search " + title[0];
 
-    document.getElementById("directory-search").placeholder = "Search " + sheet;
+    fetch('HTML.json')
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+
   }, false);
 }
 
-const toggleNav = document.getElementById("toggle-nav");
-toggleNav.addEventListener("click", () => {
-  refNav.style.display = "block";
-  navMenu.style.display = "none";
-  directory.style.display = "none";
-}, false);
+function convertJSONtoTerms(json) {
+  return "to be implemented"
+}
+
+/*
+*  Swap reference article and enable editing
+*/
+const listTerms = directory.querySelectorAll(".term-bubble");
+for (let i = 0; i < listTerms.length; i++) {
+  listTerms.item(i).addEventListener("click", () => {
+    let currTerm = listTerms.item(i).children;
+
+    document.getElementById("edit-button").removeAttribute("disabled");
+
+    document.getElementById("ref-title").innerText = currTerm.item(0).innerText;
+    document.getElementById("ref-tag").innerText = currTerm.item(1).innerText;
+    document.getElementById("ref-src").style.display = "inline";
+  }, false);
+}
 
 /*
 *  Filter reference directory by search value
@@ -78,19 +102,6 @@ editItem.addEventListener("click", () => {
 }, false);
 
 /*
-// convert terms from JSON to objects
-let temp = {
-  category: "New Section",
-  term: "Stuff",
-  definition: "Stuff define"
-};
-let temp2 = {
-  category: "New Section",
-  term: "Command",
-  definition: "Command Description"
-};
-const refTerms = [temp, temp2, , temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2, temp2];
-
 // populate directory with reference's terms (ES6+)
 let directory = document.getElementById("directory");
 refTerms.forEach(function(term) {
@@ -133,20 +144,4 @@ refTerms.forEach(function(term) {
     }
   }
 });
-
-// adds onclick event to all elements with term-bubble class
-// click event swaps reference article and enables edit and source
-const listTerms = document.getElementById("directory").getElementsByClassName("term-bubble");
-for (let i = 0; i < listTerms.length; i++) {
-  let currBubble = listTerms.item(i);
-  currBubble.addEventListener("click", function(){
-    let currTerm = currBubble.children;
-
-    document.getElementById("ref-title").innerText = currTerm.item(0).innerText;
-    document.getElementById("ref-desc").innerText = currTerm.item(1).innerText;
-
-    document.getElementById("ref-link").style.display = "inline";
-    document.getElementById("edit-button").removeAttribute("disabled");
-  }, false);
-}
 */

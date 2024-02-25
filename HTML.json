@@ -1,0 +1,39 @@
+{
+  "reference": "HTML",
+  "categories": [ "Setup" ],
+  "terms": [
+    {
+      "id": 1,
+      "modified": 1708710319591,
+      "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-html-element",
+      "category": "Setup",
+      "name": "html",
+      "tag": "HTML Document Element",
+      "info": {
+        "description": "TEST"
+      }
+    },
+    {
+        "id": 2,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-head-element",
+        "category": "Setup",
+        "name": "head",
+        "tag": "HTML Document Metadata",
+        "info": {
+          "description": "TEST"
+        }      
+    },
+    {
+        "id": 3,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/sections.html#the-body-element",
+        "category": "Setup",
+        "name": "body",
+        "tag": "HTML Document Content",
+        "info": {
+          "description": "Represents the contents of the document."
+        }      
+    }
+  ]
+}
