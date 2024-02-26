@@ -7,7 +7,7 @@
 
   <!-- <base href="https://www.quicksheet.com/" target="_blank"/> -->
   <link href="styles.css" type="text/css" rel="stylesheet" />
-  <script src="scripts.js" defer="defer"></script>
+  <script src="scripts.js" type="module" defer="defer"></script>
 </head>
 <body>
   <header class="site-header">
@@ -104,8 +104,8 @@
       </nav>
 
       <dl id="directory" class="directory">
-        <div class="category">
-          <h3 class="category-title">Information</h3>
+        <details class="category">
+          <summary class="category-title">Information</summary>
           <div class="term-bubble" title="Syntax">
             <dt class="term">Standard</dt>
             <dd class="def">Syntax and Rules</dd>
@@ -114,7 +114,7 @@
             <dt class="term">Notes</dt>
             <dd class="def">Personal Notes</dd>
           </div>
-        </div>
+        </details>
       </dl>
     </aside>
 
@@ -139,7 +139,9 @@
         <p id="ref-tag">Tagline</p>
       </hgroup>
 
-      <section id="ref-info">Information</section>
+      <section id="ref-info">
+        <h3></h3>
+      </section>
     </article>
 
     <noscript>

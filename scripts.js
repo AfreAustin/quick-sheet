@@ -1,3 +1,5 @@
+import parseTermInfo from "./parseTermInfo.js";
+
 const refNav = document.getElementById("ref-nav");
 const navMenu = document.getElementById("nav-menu");
 const directory = document.getElementById("directory");
@@ -17,7 +19,7 @@ toggleNav.addEventListener("click", () => {
 */
 const navItems = document.querySelectorAll("#ref-nav li");
 for (let i = 0; i < navItems.length; i++) {
-  navItems.item(i).addEventListener("click", () => {
+  navItems.item(i).addEventListener("click", async () => {
     refNav.style.display = "none";
     navMenu.style.display = "block";
     directory.style.display = "block";
@@ -25,31 +27,54 @@ for (let i = 0; i < navItems.length; i++) {
     let title = navItems.item(i).innerText.trim().split(" ");
     document.getElementById("directory-search").placeholder = "Search " + title[0];
 
-    fetch('HTML.json')
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-
+    convertJSONtoTerms(title);
   }, false);
 }
 
-function convertJSONtoTerms(json) {
-  return "to be implemented"
-}
+async function convertJSONtoTerms(title) {
+  await fetch(title[0]+ '.json')
+  .then((res) => res.json())
+  .then((json) => {
+    let reference = JSON.stringify(json);
+    let refObj = JSON.parse(reference);
+    let text = "";
 
-/*
-*  Swap reference article and enable editing
-*/
-const listTerms = directory.querySelectorAll(".term-bubble");
-for (let i = 0; i < listTerms.length; i++) {
-  listTerms.item(i).addEventListener("click", () => {
-    let currTerm = listTerms.item(i).children;
+    for (let category of refObj.categories) {
+      text += '<details class="category"><summary class="category-title">' + category + '</summary></details>'
+    }
+    directory.innerHTML = text;
 
-    document.getElementById("edit-button").removeAttribute("disabled");
+    let categories = directory.children
+    for (let term of refObj.terms) {
+      for (let i = 0; i < categories.length; i++) {
+        if (term.category.toUpperCase() == categories.item(i).firstElementChild.innerText.toUpperCase()) {
+          let termElem = document.createElement("div");
+          let termText = "";
 
-    document.getElementById("ref-title").innerText = currTerm.item(0).innerText;
-    document.getElementById("ref-tag").innerText = currTerm.item(1).innerText;
-    document.getElementById("ref-src").style.display = "inline";
-  }, false);
+          termText += '<div class="term-bubble" title="' + term.category + '">';
+          termText += '<dt class="term">' + term.name + '</dt>';
+          termText += '<dd class="def">' + term.tag + '</dd>';
+          termText += '</div>';
+
+          termElem.innerHTML = termText;
+
+          termElem.addEventListener("click", () => {
+            document.getElementById("edit-button").removeAttribute("disabled");
+
+            document.getElementById("ref-src").href = term.source;
+            document.getElementById("ref-mod").innerText = "Modified " + new Date(term.modified);
+            document.getElementById("ref-title").innerText = term.name;
+            document.getElementById("ref-tag").innerText = term.tag;
+
+            document.getElementById("ref-info").innerHTML = parseTermInfo(term.info);
+          });
+
+          categories.item(i).append(termElem);
+        }
+      }
+    }
+  })
+  .catch((err) => console.log('There was an error', err));
 }
 
 /*
@@ -100,48 +125,3 @@ editItem.addEventListener("click", () => {
 
   console.log("TO BE IMPLEMENTED");
 }, false);
-
-/*
-// populate directory with reference's terms (ES6+)
-let directory = document.getElementById("directory");
-refTerms.forEach(function(term) {
-  let sections = directory.children;
-  let exists = false;
-
-  for (i = 0; i < sections.length; i++) {
-    let category = sections.item(i).firstElementChild.innerText; 
-    if (category.toUpperCase() == term.category.toUpperCase()) exists = true;
-  }
-
-  if (exists == false) {
-    const categoryElem = document.createElement("section");
-    const catTitleElem = document.createElement("h3");
-
-    categoryElem.setAttribute("class", "category");
-    catTitleElem.setAttribute("class", "category-title");
-
-    directory.appendChild(categoryElem);
-    categoryElem.appendChild(catTitleElem);
-    catTitleElem.innerText = term.category;
-  }
-
-  for (i = 0; i < sections.length; i++) {
-    if (term.category.toUpperCase() == sections.item(i).firstElementChild.innerText.toUpperCase()) {
-      const bubbleElem = document.createElement("div");
-      const termElem = document.createElement("dt");
-      const defElem = document.createElement("dd");
-
-      bubbleElem.setAttribute("class", "term-bubble");
-      bubbleElem.setAttribute("title", term.term);
-      termElem.setAttribute("class", "term");
-      defElem.setAttribute("class", "def");
-
-      sections.item(i).appendChild(bubbleElem);
-      bubbleElem.appendChild(termElem);
-      termElem.innerText = term.term;
-      bubbleElem.appendChild(defElem);
-      defElem.innerText = term.definition;
-    }
-  }
-});
-*/
