@@ -40,7 +40,7 @@ async function convertJSONtoTerms(title) {
     let text = "";
 
     for (let category of refObj.categories) {
-      text += '<details class="category"><summary class="category-title">' + category + '</summary></details>'
+      text += '<details class="category" open="open"><summary class="category-title">' + category + '</summary></details>'
     }
     directory.innerHTML = text;
 
@@ -66,7 +66,7 @@ async function convertJSONtoTerms(title) {
             document.getElementById("ref-title").innerText = term.name;
             document.getElementById("ref-tag").innerText = term.tag;
 
-            document.getElementById("ref-info").innerHTML = parseTermInfo(term.info);
+            document.getElementById("ref-info").innerHTML = parseTermInfo(refObj.reference, term.info);
           });
 
           categories.item(i).append(termElem);
