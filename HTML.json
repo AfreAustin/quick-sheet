@@ -1,6 +1,6 @@
 {
   "reference": "HTML",
-  "categories": [ "Setup" ],
+  "categories": [ "Setup", "Metadata Content" ],
   "terms": [
     {
       "id": 1,
@@ -10,7 +10,9 @@
       "name": "html",
       "tag": "HTML Document Element",
       "info": {
-        "description": "TEST"
+        "syntax": "<html></html>",
+        "attributes": "global",
+        "description": "Declares the HTML document's root."
       }
     },
     {
@@ -21,7 +23,9 @@
         "name": "head",
         "tag": "HTML Document Metadata",
         "info": {
-          "description": "TEST"
+          "syntax": "<head></head>",
+          "attributes": "global",
+          "description": "Declares the HTML document's metadata. The <title> tag must be included."
         }      
     },
     {
@@ -32,8 +36,75 @@
         "name": "body",
         "tag": "HTML Document Content",
         "info": {
-          "description": "Represents the contents of the document."
+          "syntax": "<body></body>",
+          "attributes": "global, event",
+          "description": "Declares the HTML document's contents."
         }      
+    },
+    {
+        "id": 4,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-title-element",
+        "category": "Metadata Content",
+        "name": "title",
+        "tag": "HTML Document Title",
+        "info": {
+          "syntax": "<title></title>",
+          "attributes": "global",
+          "description": "Declares the HTML document's title or name. There must only be one title per document. \n Titles shoud be used to identify documents even when used out of context, for example in a user's history/bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context."
+        }
+    },
+    {
+        "id": 5,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-base-element",
+        "category": "Metadata Content",
+        "name": "base",
+        "tag": "HTML Document Base URL",
+        "info": {
+          "syntax": "<base>",
+          "attributes": "global, href, target",
+          "description": "Declares the HTML document's base URL. There must only be one base per document. If multiple are set, then all but the first are ignored. \n This is used for parsing URLs and naming the default navigable for following hyperlinks. This does not represent any content beyond this information. \n It must have either the href or target attribute, or both. If href is set, then this must come before all elements that have attributes taking URLs. If target is set, then this must have a valid navigable target name/keyword, which specifies which navigable is to be used as the default when hyperlinks and forms in the Document cause navigation. Additionally, this must come before any elements that declare hyperlinks."
+        }      
+    },
+    {
+        "id": 6,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element",
+        "category": "Metadata Content",
+        "name": "meta",
+        "tag": "HTML Document General Metadata",
+        "info": {
+          "syntax": "<meta>",
+          "attributes": "global, name, http-equiv, content, charset, media, itemprop",
+          "description": "Declares the HTML document's metadata that can't be expressed using the title, base, link, style, and script elements. \n There should be exactly one of the name, http-equiv, charset, and itemprop attributes set. If name, http-equiv, or itemprop is set, then content should be set; otherwise, it should be omitted. There must be only one meta element with charset per document. \n This can represent document-level metadata with the name attribute, pragma directives with the http-equiv attribute, and the file's character encoding declaration when an HTML document is serialized to string form (e.g. for transmission over the network or for disk storage) with the charset attribute. "
+        }      
+    },
+    {
+        "id": 7,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-link-element",
+        "category": "Metadata Content",
+        "name": "link",
+        "tag": "HTML Document External Resource",
+        "info": {
+          "syntax": "<link>",
+          "attributes": "global, href, crossorigin, rel, itemprop, media, integrity, hreflang, type, referrerpolicy, sizes, imagesrcset, imagesizes, as, blocking, color, disabled, fetchpriority",
+          "description": "Links HTML Document to other resources. There should be either a href or imagesrcset, or both set. There should be either a rel or itemptop set. \n Two types of links can be created: external resources and hyperlinks. The link types section defines whether a particular link type is an external resource or a hyperlink. One link element can create multiple links (of which some might be external resource links and some might be hyperlinks); exactly which and how many links are created depends on the keywords given in the rel attribute. User agents must process the links on a per-link basis, not a per-element basis."
+        }
+    },
+    {
+        "id": 8,
+        "modified": 1708710319591,
+        "source": "https://html.spec.whatwg.org/multipage/semantics.html#the-style-element",
+        "category": "Metadata Content",
+        "name": "style",
+        "tag": "HTML Document Embedded Stylesheet",
+        "info": {
+          "syntax": "<style></style>",
+          "attributes": "global, media, blocking",
+          "description": "Embeds a stylesheet into the HTML Document."
+        }
     }
   ]
 }
