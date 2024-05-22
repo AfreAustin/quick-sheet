@@ -145,13 +145,39 @@ body { margin: 0; }
 
 /* form dialog box items */
 .form-dialog {
-  position: fixed;
-  z-index: 9;
   overflow: scroll;
   background-color: var(--main-color);
   border: 3px ridge var(--tertiary);
   border-radius: 10px;
-  width: 50%;
   height: 80%;
   color: var(--secondary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.form-dialog::backdrop {
+  background-image: radial-gradient(circle, var(--main-color), var(--tertiary), var(--secondary));
+  opacity: 0.75;
+}
+.reference-fields {
+  display: table;
+  background-color: var(--tertiary);
+  border: 3px inset var(--tertiary);
+  border-radius: 10px;
+  border-spacing: 10px;
+}
+.reference-fields legend {
+  background-color: var(--main-color);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 600;
+}
+.reference-fields .input-row { display: table-row; }
+.reference-fields .input-row > label { display: table-cell; }
+.reference-fields .input-row > *:not(label) { 
+  background-color: var(--secondary);
+  border-radius: 5px;
+  padding: 3px 5px;
+  color: var(--main-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  accent-color: var(--tertiary);
+}
+#close-form { float: right; }

@@ -51,7 +51,7 @@ async function convertJSONtoTerms(title) {
           let termElem = document.createElement("div");
           let termText = "";
 
-          termText += '<div class="term-bubble" title="' + term.category + '">';
+          termText += '<div class="term-bubble" title="' + term.name + '">';
           termText += '<dt class="term">' + term.name + '</dt>';
           termText += '<dd class="def">' + term.tag + '</dd>';
           termText += '</div>';
@@ -97,9 +97,14 @@ const formDialog = document.getElementById("form-dialog");
 const formTitle = document.getElementById("form-title");
 
 // toggle dialog box
-function toggleDialog() {
+function toggleDialog(event) {
   if (formDialog.open) formDialog.close();
-  else formDialog.showModal();
+  else {
+    formDialog.showModal();
+
+    if (event == "add") document.getElementById("add-item-form").style.display = "block";
+    if (event == "edit") document.getElementById("edit-item-form").style.display = "block"; 
+  }
 }
 
 // close form

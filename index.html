@@ -7,7 +7,7 @@
 
   <!-- <base href="https://www.quicksheet.com/" target="_blank"/> -->
   <link href="styles.css" type="text/css" rel="stylesheet" />
-  <script src="scripts.js" type="module" defer="defer"></script>
+  <script src="setup.js" type="module" defer="defer"></script>
 </head>
 <body>
   <header class="site-header">
@@ -104,27 +104,16 @@
       </nav>
 
       <dl id="directory" class="directory">
-        <details class="category">
-          <summary class="category-title">Information</summary>
-          <div class="term-bubble" title="Syntax">
-            <dt class="term">Standard</dt>
-            <dd class="def">Syntax and Rules</dd>
-          </div>
-          <div class="term-bubble" title="Notes">
-            <dt class="term">Notes</dt>
-            <dd class="def">Personal Notes</dd>
-          </div>
-        </details>
       </dl>
     </aside>
 
     <article id="reference" class="reference">
       <menu class="reference-menu">
         <li class="menu-item">
-          <button id="add-button" class="menu-button" title="Add" 
+          <button id="add-button" class="menu-button" title="Add Article" 
             type="button"> + Add Article
           </button>           
-          <button id="edit-button" class="menu-button" title="Edit" 
+          <button id="edit-button" class="menu-button" title="Edit Article" 
             type="button" disabled="disabled"> ✎ Edit Article
           </button> 
         </li>
@@ -150,11 +139,57 @@
   </main>
 
   <dialog id="form-dialog" class="form-dialog">
-    <button id="close-form" class="" type="button">X</button>
-    <form>
+    <button id="close-form" class="menu-button" type="button">Close Form</button>
+    <form method="dialog">
       <h1 id="form-title"></h1>
+
+      <fieldset class="reference-fields">
+        <legend>Term Metadata</legend>
+
+        <p class="input-row">
+          <label for="field-source">Source</label>
+          <input name="source" id="field-source" type="url" required="required" />
+        </p>
+
+        <p class="input-row">
+          <label for="field-category">Category</label>
+          <select name="category" id="field-category" required="required">
+            <option>1</option>
+          </select>
+        </p>
+
+        <p class="input-row">
+          <label for="field-term">Name </label>
+          <input name="term" id="field-term" type="text" required="required" />
+        </p>
+
+        <p class="input-row">
+        <label for="field-tag">Tagline</label>
+        <input name="tag" id="field-tag" type="url" required="required" />
+        </p>
+      </fieldset>
+
+      <fieldset id="fieldset-HTML" class="reference-fields">
+        <legend>HTML Element</legend>
+        
+        <p class="input-row">
+          <label for="field-syntax">Syntax</label>
+          <input name="syntax" id="field-syntax" type="text" required="required" />
+        </p>
+
+        <p class="input-row">
+          <label for="field-attributes">Attributes</label>
+          <input name="attributes" id="field-attributes" type="text" required="required" />
+        </p>
+
+        <p class="input-row">
+          <label for="description">Description</label>
+          <input name="description" type="text" required="required" />
+        </p>
+      </fieldset>
+
+      <button class="menu-button" type="submit">SUBMIT</button>
     </form>
-    <button type="submit">SUBMIT</button>
   </dialog>
 </body>
 </html>

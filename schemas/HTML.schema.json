@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "html.schema.json",
+  "title": "HTML",
+  "description": "HTML Reference Sheet",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "description": "The name of the technology being referenced",
+      "type": "string"
+    },
+    "categories": {
+      "description": "The list of categories in the reference",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "terms": {
+      "description": "The terms in the reference",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique id of the reference term",
+            "type": "integer"
+          },
+          "modified": {
+            "description": "The date the item was edited or modified",
+            "type": "integer"
+          },
+          "source": {
+            "description": "The original source or standard of the term",
+            "type": "string"
+          },
+          "category": {
+            "description": "The category of the term",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the term",
+            "type": "string"
+          },
+          "tag": {
+            "description": "A short description of the term, at most one sentence",
+            "type": "string"
+          },
+          "info": {
+            "type": "object",
+            "properties": {
+              "syntax": {
+                "description": "The syntax of the term",
+                "type": "string"
+              },
+              "attributes": {
+                "description": "The unique id of the reference term",
+                "type": "string"
+              },
+              "description": {
+                "description": "The description of the reference term",
+                "type": "string"
+              }
+            },
+            "required": [ "syntax", "attributes", "description" ]
+          }
+        },
+        "required": [ "id", "modified", "source", "category", "name", "tag", "info" ]
+      }
+    }
+  },
+  "required": [ "reference", "categories", "terms" ]
+}
